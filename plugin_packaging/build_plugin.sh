@@ -3,6 +3,7 @@
 current=`pwd`
 mkdir -p /tmp/coastSHARK/
 cp * /tmp/coastSHARK/
+cp ../setup.py /tmp/coastSHARK/
 cp -R ../coastSHARK/* /tmp/coastSHARK/
 cd /tmp/coastSHARK/
 
