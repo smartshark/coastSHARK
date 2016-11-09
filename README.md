@@ -9,7 +9,7 @@ pip install https://github.com/smartshark/coastSHARK/zipball/master
 ```
 
 ### via setup.py
-```
+```bash
 python setup.py install
 ```
 

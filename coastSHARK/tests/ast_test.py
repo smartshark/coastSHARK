@@ -3,7 +3,7 @@ import tempfile
 
 from coastSHARK.util.extract_ast import ExtractAstPython, ExtractAstJava
 from coastSHARK.util.extract_ast import PYTHON_NODE_TYPES, JAVA_NODE_TYPES
-
+from coastSHARK.util.extract_ast import convert_2to3
 
 PYTHON_TEST_FILE_CONTENT = """
 import sys
@@ -17,7 +17,9 @@ class HelloWorld(object):
 """
 
 PYTHON2_TEST_FILE_CONTENT = """
-print "narf"
+import sys
+
+print "narf: %s" % ("narf2",)
 """
 
 JAVA_TEST_FILE_CONTENT = """
@@ -46,6 +48,27 @@ class TestAstExtraction(unittest.TestCase):
         node_count = 26
         imports = ['sys', 'os', 'datetime.date']
         wanted_type_counts = {'Load': 5, 'Module': 1, 'Str': 1, 'Expr': 1, 'arguments': 1, 'ImportFrom': 1, 'ClassDef': 1, 'Name': 3, 'arg': 1, 'Attribute': 2, 'FunctionDef': 1, 'alias': 3, 'Call': 3, 'Import': 2}
+
+        type_counts = {k: 0 for k in PYTHON_NODE_TYPES}
+        for k, v in wanted_type_counts.items():
+            type_counts[k] = v
+
+        self.assertEqual(eap.node_count, node_count)
+        self.assertEqual(eap.imports, imports)
+        self.assertEqual(eap.type_counts, type_counts)
+
+    def test_python2(self):
+
+        py = tempfile.NamedTemporaryFile(delete=False)
+        py.write(PYTHON2_TEST_FILE_CONTENT.encode('utf-8'))
+        py.close()
+
+        eap = ExtractAstPython(py.name)
+        eap.load()
+
+        node_count = 13
+        imports = ['sys']
+        wanted_type_counts = {'Load': 2, 'Str': 2, 'Module': 1, 'Call': 1, 'Name': 1, 'Tuple': 1, 'BinOp': 1, 'Expr': 1, 'Import': 1, 'Mod': 1, 'alias': 1}
 
         type_counts = {k: 0 for k in PYTHON_NODE_TYPES}
         for k, v in wanted_type_counts.items():

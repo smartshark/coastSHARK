@@ -1,4 +1,7 @@
 import ast
+
+from lib2to3 import refactor
+
 import javalang
 from . import error
 
@@ -50,6 +53,17 @@ JAVA_NODE_TYPES = [
 ]
 # newly encountered in checkstyle project
 JAVA_NODE_TYPES += ['VariableDeclarator', 'ClassCreator', 'ArrayCreator', 'InnerClassCreator']
+
+
+def convert_2to3(file_content, file_name):
+
+    # all default fixers
+    avail_fixes = set(refactor.get_fixers_from_package("lib2to3.fixes"))
+
+    # create default RefactoringTool, apply to passed file_content string and return fixed string
+    rt = refactor.RefactoringTool(avail_fixes)
+    tmp = rt.refactor_string(file_content, file_name)
+    return str(tmp)
 
 
 class NodePathVisitor(object):
@@ -178,7 +192,7 @@ class ExtractAstPython(object):
 
     def load(self):
         with open(self.filename, 'r') as f:
-            self.astdata = ast.parse(source=f.read(), filename=self.filename)
+            self.astdata = ast.parse(source=convert_2to3(f.read(), self.filename), filename=self.filename)
 
         assert self.astdata is not None
 
