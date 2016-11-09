@@ -16,6 +16,10 @@ class HelloWorld(object):
         print("Hello World on {}".format(date.today()))
 """
 
+PYTHON2_TEST_FILE_CONTENT = """
+print "narf"
+"""
+
 JAVA_TEST_FILE_CONTENT = """
 import javax.awt.*;
 
