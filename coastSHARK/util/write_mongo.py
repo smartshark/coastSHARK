@@ -17,13 +17,13 @@ class MongoDb(object):
     def write_imports(self, filepath, imports):
         pr = Project.objects.get(url=self.project_url)
         c = Commit.objects.get(revisionHash=self.revision, projectId=pr.id)
-        f = File.objects.get(path=filepath)
+        f = File.objects.get(path=filepath, projectId=pr.id)
 
         Import.objects(commitId=c.id, fileId=f.id).upsert_one(imports=imports)
 
     def write_node_type_counts(self, filepath, node_count, node_type_counts):
         pr = Project.objects.get(url=self.project_url)
         c = Commit.objects.get(revisionHash=self.revision, projectId=pr.id)
-        f = File.objects.get(path=filepath)
+        f = File.objects.get(path=filepath, projectId=pr.id)
 
         NodeTypeCount.objects(commitId=c.id, fileId=f.id).upsert_one(nodeCount=node_count, nodeTypeCounts=node_type_counts)
