@@ -1,18 +1,6 @@
 #!/usr/bin/env python
 
-"""Plugin for smartSHARK
-
-call me with:
-checkstyle_master = 5530d4c27d508c513b68af67aadede84b4cfa102
-checkstyle_giturl = https://github.com/checkstyle/checkstyle
-python smartshark_plugin.py -U root -P balla -DB vcsshark -i /srv/www/vcsSHARK/working_dir/checkstyle/ -r $REVISION_HASH -u $GIT_URI
-
-todo:
-- ignore_dirs should take a glob
-- ignore_files should take a glob
-- add logging
-- logging on stdout
-"""
+"""Plugin for smartSHARK"""
 
 import argparse
 import os
