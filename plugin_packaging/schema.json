@@ -1,2 +1,68 @@
 {
+"plugin": "mecoSHARK_0.10",
+"collections":[  
+	{  
+     	"fields":[  
+            {  
+               "type":"StringType",
+               "logical_type":"ID",
+               "field_name":"_id"
+            },
+            {  
+               "type":"StringType",
+               "logical_type":"ID",
+               "field_name":"commitId"
+            },
+            {  
+               "type":"StringType",
+               "logical_type":"ID",
+               "field_name":"fileId"
+            },
+            {  
+            	"sub_type": "StringType",
+               "type":"ArrayType",
+               "logical_type":"ProductMetric",
+               "field_name":"imports"
+            }
+        ],
+         "collection_name":"import"
+      },
+    {  
+     	"fields":[  
+            {  
+               "type":"StringType",
+               "logical_type":"ID",
+               "field_name":"_id"
+            },
+            {  
+               "type":"StringType",
+               "logical_type":"ID",
+               "field_name":"commitId"
+            },
+            {  
+               "type":"StringType",
+               "logical_type":"ID",
+               "field_name":"fileId"
+            },
+            {  
+               "type":"IntegerType",
+               "logical_type":"ProductMetric",
+               "field_name":"nodeCount"
+            },
+            {  
+               "type":"StructType",
+               "logical_type":"ProductMetric",
+               "field_name":"nodeTypeCounts",
+               "fields": [ 
+                  {
+                     "type":"IntegerType",
+                     "logical_type":"ProductMetric",
+                     "field_name":"Lt"
+                  }
+               ]
+            }
+        ],
+         "collection_name":"node_type_count"
+      }
+]
 }
