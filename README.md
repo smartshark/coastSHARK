@@ -17,3 +17,11 @@ python setup.py install
 ```bash
 python setup.py test
 ```
+
+## Build smartSHARK Plugin .tar
+```bash
+cd ./plugin_packaging/
+
+# creates the coastSHARK_plugin.tar
+./build_plugin.sh
+```
