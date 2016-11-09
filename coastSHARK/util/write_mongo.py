@@ -6,8 +6,8 @@ from util.mongomodels import Project, File, Import, NodeTypeCount, Commit
 
 class MongoDb(object):
 
-    def __init__(self, host, port, db, user, password, project_url, revision):
-        self.db = {'host': host, 'port': port, 'db': db, 'username': user, 'password': password}
+    def __init__(self, host, port, db, user, password, authentication_source, project_url, revision):
+        self.db = {'host': host, 'port': port, 'db': db, 'username': user, 'password': password, 'authentication_source': authentication_source}
         self.project_url = project_url
         self.revision = revision
 

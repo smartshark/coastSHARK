@@ -9,6 +9,6 @@ cp -R $REPOSITORY_PATH "/dev/shm/$NEW_UUID"
 cd "/dev/shm/$NEW_UUID"
 git checkout $1 --quiet
 
-python3.5 $PLUGIN_PATH/smartshark_plugin.py --url $4 -U $5 -P $6 -DB $7 -H $8 -p $9 -r $1 -i "/dev/shm/$NEW_UUID" -out "/dev/shm/$NEW_UUID"
+python3.5 $PLUGIN_PATH/smartshark_plugin.py --url $4 -U $5 -P $6 -DB $7 -H $8 -p $9 -r $1 -a ${10} -i "/dev/shm/$NEW_UUID"
 
 rm -rf "/dev/shm/$NEW_UUID"

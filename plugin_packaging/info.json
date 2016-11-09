@@ -2,8 +2,9 @@
     "name": "coastSHARK",
     "author": "Alexander Trautsch",
     "version": "1.00",
-    "abstraction_level": "rev",
+    "plugin_type": "rev",
     "description": "Collects AST Data.",
+    "linux_libraries": [],
     "requires": [
         {
             "name": "vcsSHARK",
@@ -12,6 +13,13 @@
         }
     ],
     "arguments": [
+        {
+            "name": "plugin_path",
+            "required": true,
+            "position": 1,
+            "type": "install",
+            "description": "path to the root folder of the plugin"
+        },
         {
             "name": "revision",
             "required": true,
@@ -74,6 +82,13 @@
             "position": 9,
             "type": "execute",
             "description": "port on which the mongodb is listening on"
+        },
+        {
+            "name": "db_authentication",
+            "required": true,
+            "position": 10,
+            "type": "execute",
+            "description": "databse against which users are authenticated"
         }
     ]
 }

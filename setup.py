@@ -18,6 +18,7 @@ setup(name='coastSHARK',
       download_url='https://gitlab.drecks-provider.de/werkzeuge/kyk/repository/archive.tar.gz?ref=release',
       test_suite='coastSHARK.tests',
       packages=find_packages(),
+      zip_safe=False,
       classifiers=[
         "Programming Language :: Python :: 3",
         "Development Status :: 4 - Beta",

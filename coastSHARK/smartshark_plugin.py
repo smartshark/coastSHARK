@@ -22,7 +22,7 @@ def main(args):
         raise Exception('--input {} is not readable'.format(args.input))
 
     # check mongodb connectivity
-    m = MongoDb(args.db_hostname, args.db_port, args.db_database, args.db_user, args.db_password, args.url, args.rev)
+    m = MongoDb(args.db_hostname, args.db_port, args.db_database, args.db_user, args.db_password, args.db_authentication, args.url, args.rev)
     m.connect()
 
     for root, dirs, files in os.walk(args.input):
@@ -69,5 +69,6 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--input', help='Path to the checked out repository directory', required=True)
     parser.add_argument('-r', '--rev', help='Hash of the revision.', required=True)
     parser.add_argument('-u', '--url', help='URL of the project (e.g., GIT Url).', required=True)
+    parser.add_argument('-a', '--db-authentication', help='Name of the authentication database')
 
     main(parser.parse_args())
