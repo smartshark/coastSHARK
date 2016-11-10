@@ -26,6 +26,14 @@ cd ./plugin_packaging/
 ./build_plugin.sh
 ```
 
+## Rebuild schema.json
+```bash
+cd ./plugin_packaging/
+
+# recreates schema.json from MongoDB models
+python build_schema.py
+```
+
 ## Execution
 
 To run coastSHARK needs an already checked out repository. It also depends on a running MongoDB and that the MongoDB is filled for this project by vcsSHARK.

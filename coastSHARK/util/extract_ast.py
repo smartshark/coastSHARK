@@ -48,15 +48,14 @@ JAVA_NODE_TYPES = [
     'TryResource', 'CatchClause', 'CatchClauseParameter',
     'SwitchStatementCase', 'ForControl', 'EnhancedForControl',
     'Expression', 'Assignment', 'TernaryExpression', 'BinaryOperation', 'Cast', 'MethodReference', 'LambdaExpression',
-    'Primary', 'Literal', 'This', 'MemberReference', 'Invocation', 'ExplicitConstructorInvocation', 'SuperConstructorInvocation', 'MethodInvocation', 'SuperMethodInvocation', 'ArraySelector', 'ClassReference', 'VoidClassReference',
+    'Primary', 'Literal', 'This', 'MemberReference', 'Invocation', 'ExplicitConstructorInvocation', 'SuperConstructorInvocation', 'MethodInvocation', 'SuperMethodInvocation', 'ArraySelector', 'ClassReference', 'VoidClassReference', 'VariableDeclarator', 'ClassCreator', 'ArrayCreator', 'InnerClassCreator',
     'EnumBody', 'EnumConstantDeclaration', 'AnnotationMethod'
 ]
-# newly encountered in checkstyle project
-JAVA_NODE_TYPES += ['VariableDeclarator', 'ClassCreator', 'ArrayCreator', 'InnerClassCreator']
 
 
 # https://docs.python.org/3/library/2to3.html
 def convert_2to3(file_content, file_name):
+    """Quick helper function to convert python2 to python3 so that we can keep the ast buildin."""
 
     # all default fixers
     avail_fixes = set(refactor.get_fixers_from_package("lib2to3.fixes"))
@@ -185,7 +184,7 @@ class ExtractAstJava(object):
 
 
 class ExtractAstPython(object):
-    """"Extxracts Python ASTs. Uses the build in ast and the visitor pattern."""
+    """"Extracts Python ASTs. Uses the build in ast and the visitor pattern."""
 
     def __init__(self, filename):
         self.astdata = None
