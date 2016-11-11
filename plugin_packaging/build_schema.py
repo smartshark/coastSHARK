@@ -16,9 +16,11 @@ from util.extract_ast import PYTHON_NODE_TYPES, JAVA_NODE_TYPES
 def mongo_to_schema(field_name, field):
         if type(field) == ObjectIdField:
             # exception for id
+            logical_type = 'RID'
             if field_name == 'id':
                 field_name = '_id'
-            return {'type': 'StringType', 'logical_type': 'ID', 'field_name': field_name}
+                logical_type = 'OID'
+            return {'type': 'ObjectIdType', 'logical_type': logical_type, 'field_name': field_name}
         elif type(field) == ListField:
             return {'type': 'ArrayType', 'logical_type': 'ProductMetric', 'field_name': field_name}
         elif type(field) == DictField:
@@ -36,6 +38,7 @@ def main():
 
         if k == 'imports':
             field['sub_type'] = 'StringType'
+            field['logical_type'] = ['ProductMetric', 'Java', 'Python']
         fields.append(field)
 
     schema['collections'].append({'collection_name': 'import', 'fields': fields})
@@ -47,8 +50,10 @@ def main():
         # we need to add every possible ast node type
         if k == 'nodeTypeCounts':
             sfields = []
-            for nt in PYTHON_NODE_TYPES + JAVA_NODE_TYPES:
-                sfields.append({'type': 'IntegerType', 'logical_type': 'ProductMetric', 'field_name': nt})
+            for nt in PYTHON_NODE_TYPES:
+                sfields.append({'type': 'IntegerType', 'logical_type': ['ProductMetric', 'Python'], 'field_name': nt})
+            for nt in JAVA_NODE_TYPES:
+                sfields.append({'type': 'IntegerType', 'logical_type': ['ProductMetric', 'Java'], 'field_name': nt})
             field['fields'] = sfields
 
         fields.append(field)
