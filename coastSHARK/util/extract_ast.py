@@ -42,7 +42,7 @@ JAVA_NODE_TYPES = [
     'TypeParameter',
     'Annotation', 'ElementValuePair', 'ElementArrayValue',
     'Member', 'MethodDeclaration', 'FieldDeclaration', 'ConstructorDeclaration',
-    'ConstantDeclaration', 'ArrayInitializer', 'VariableDeclaration', 'LocalVariableDeclaration', 'VariableDeclaration', 'FormalParameter', 'InferredFormalParameter',
+    'ConstantDeclaration', 'ArrayInitializer', 'VariableDeclaration', 'LocalVariableDeclaration', 'FormalParameter', 'InferredFormalParameter',
     'Statement', 'IfStatement', 'WhileStatement', 'DoStatement', 'ForStatement', 'AssertStatement', 'BreakStatement', 'ContinueStatement', 'ReturnStatement', 'ThrowStatement', 'SynchronizedStatement',
     'TryStatement', 'SwitchStatement', 'BlockStatement', 'StatementExpression',
     'TryResource', 'CatchClause', 'CatchClauseParameter',
