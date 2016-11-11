@@ -4,6 +4,11 @@
             "collection_name": "import",
             "fields": [
                 {
+                    "field_name": "_id",
+                    "logical_type": "OID",
+                    "type": "ObjectIdType"
+                },
+                {
                     "field_name": "imports",
                     "logical_type": [
                         "ProductMetric",
@@ -22,32 +27,12 @@
                     "field_name": "fileId",
                     "logical_type": "RID",
                     "type": "ObjectIdType"
-                },
-                {
-                    "field_name": "_id",
-                    "logical_type": "OID",
-                    "type": "ObjectIdType"
                 }
             ]
         },
         {
             "collection_name": "node_type_count",
             "fields": [
-                {
-                    "field_name": "_id",
-                    "logical_type": "OID",
-                    "type": "ObjectIdType"
-                },
-                {
-                    "field_name": "commitId",
-                    "logical_type": "RID",
-                    "type": "ObjectIdType"
-                },
-                {
-                    "field_name": "nodeCount",
-                    "logical_type": "ProductMetric",
-                    "type": "IntegerType"
-                },
                 {
                     "field_name": "nodeTypeCounts",
                     "fields": [
@@ -1431,6 +1416,21 @@
                     ],
                     "logical_type": "ProductMetric",
                     "type": "StructType"
+                },
+                {
+                    "field_name": "nodeCount",
+                    "logical_type": "ProductMetric",
+                    "type": "IntegerType"
+                },
+                {
+                    "field_name": "_id",
+                    "logical_type": "OID",
+                    "type": "ObjectIdType"
+                },
+                {
+                    "field_name": "commitId",
+                    "logical_type": "RID",
+                    "type": "ObjectIdType"
                 },
                 {
                     "field_name": "fileId",

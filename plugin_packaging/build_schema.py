@@ -56,6 +56,7 @@ def main():
                 # import is also in JAVA
                 if nt in JAVA_NODE_TYPES:
                     logical_type.append('Java')
+                    # print(nt)
 
                 sfields.append({'type': 'IntegerType', 'logical_type': logical_type, 'field_name': nt})
 
