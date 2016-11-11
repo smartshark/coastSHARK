@@ -4,11 +4,6 @@
             "collection_name": "import",
             "fields": [
                 {
-                    "field_name": "_id",
-                    "logical_type": "OID",
-                    "type": "ObjectIdType"
-                },
-                {
                     "field_name": "imports",
                     "logical_type": [
                         "ProductMetric",
@@ -27,6 +22,11 @@
                     "field_name": "fileId",
                     "logical_type": "RID",
                     "type": "ObjectIdType"
+                },
+                {
+                    "field_name": "_id",
+                    "logical_type": "OID",
+                    "type": "ObjectIdType"
                 }
             ]
         },
@@ -39,14 +39,14 @@
                     "type": "ObjectIdType"
                 },
                 {
-                    "field_name": "fileId",
+                    "field_name": "commitId",
                     "logical_type": "RID",
                     "type": "ObjectIdType"
                 },
                 {
-                    "field_name": "commitId",
-                    "logical_type": "RID",
-                    "type": "ObjectIdType"
+                    "field_name": "nodeCount",
+                    "logical_type": "ProductMetric",
+                    "type": "IntegerType"
                 },
                 {
                     "field_name": "nodeTypeCounts",
@@ -599,7 +599,8 @@
                             "field_name": "Import",
                             "logical_type": [
                                 "ProductMetric",
-                                "Python"
+                                "Python",
+                                "Java"
                             ],
                             "type": "IntegerType"
                         },
@@ -829,14 +830,6 @@
                         },
                         {
                             "field_name": "CompilationUnit",
-                            "logical_type": [
-                                "ProductMetric",
-                                "Java"
-                            ],
-                            "type": "IntegerType"
-                        },
-                        {
-                            "field_name": "Import",
                             "logical_type": [
                                 "ProductMetric",
                                 "Java"
@@ -1440,9 +1433,9 @@
                     "type": "StructType"
                 },
                 {
-                    "field_name": "nodeCount",
-                    "logical_type": "ProductMetric",
-                    "type": "IntegerType"
+                    "field_name": "fileId",
+                    "logical_type": "RID",
+                    "type": "ObjectIdType"
                 }
             ]
         }

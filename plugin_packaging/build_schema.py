@@ -51,8 +51,18 @@ def main():
         if k == 'nodeTypeCounts':
             sfields = []
             for nt in PYTHON_NODE_TYPES:
-                sfields.append({'type': 'IntegerType', 'logical_type': ['ProductMetric', 'Python'], 'field_name': nt})
+                logical_type = ['ProductMetric', 'Python']
+
+                # import is also in JAVA
+                if nt in JAVA_NODE_TYPES:
+                    logical_type.append('Java')
+
+                sfields.append({'type': 'IntegerType', 'logical_type': logical_type, 'field_name': nt})
+
             for nt in JAVA_NODE_TYPES:
+                if nt in PYTHON_NODE_TYPES:
+                    continue
+
                 sfields.append({'type': 'IntegerType', 'logical_type': ['ProductMetric', 'Java'], 'field_name': nt})
             field['fields'] = sfields
 
