@@ -1,5 +1,5 @@
 from mongoengine import *
-from util.mongomodels import Project, File, Import, NodeTypeCount, Commit
+from .mongomodels import Project, File, Import, NodeTypeCount, Commit
 
 # todo: extract our models from mongomodels, just use mongomodels
 
