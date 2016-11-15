@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import argparse
 import tempfile
 import subprocess
@@ -18,7 +19,8 @@ class GitScrape(object):
             self._path = tempfile.mkdtemp()
 
         # clone and access
-        Repo.clone_from(args.url, self._path)
+        if not os.path.isdir(self._path):
+            Repo.clone_from(args.url, self._path)
         self._repo = Repo(self._path)
         self._args = args
 
