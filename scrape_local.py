@@ -12,7 +12,10 @@ from git import Repo
 class GitScrape(object):
 
     def __init__(self, args):
-        self._path = tempfile.mkdtemp()
+        if args.path:
+            self._path = args.path
+        else:
+            self._path = tempfile.mkdtemp()
 
         # clone and access
         Repo.clone_from(args.url, self._path)
@@ -28,7 +31,7 @@ class GitScrape(object):
                 'db_database': 'smartshark',
                 'db_user': 'root',
                 'db_password': 'balla',
-                'db_authentication': 'admin',
+                'db_authentication': 'smartshark',
                 'url': self._args.url,
                 'input': self._path
                 }
@@ -45,9 +48,9 @@ class GitScrape(object):
                 'db_database': 'smartshark',
                 'db_user': 'root',
                 'db_password': 'balla',
-                'db_authentication': 'admin',
+                'db_authentication': 'smartshark',
                 'url': self._args.url,
-                'rev': revision,
+                'rev': revision.hexsha,
                 'input': self._path
                 }
 
@@ -70,5 +73,6 @@ if __name__ == '__main__':
     parser.add_argument('-b', '--branch', help='Git branch to use', default='master')
     parser.add_argument('-m', '--max_count', help='Max number of Revisions', default=None)
     parser.add_argument('-u', '--url', help='URL of the Repo', required=True)
+    parser.add_argument('-p', '--path', help='Persistent path of working dir for Repos.')
     g = GitScrape(parser.parse_args())
     g.run()
