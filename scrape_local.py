@@ -61,6 +61,7 @@ class GitScrape(object):
         for k, v in args.items():
             setattr(tmp, k, v)
 
+        print('running for: {}'.format(tmp.rev))
         coast(tmp)
 
     def run(self):
