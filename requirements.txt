@@ -1,0 +1,7 @@
+gitdb2==2.0.0
+GitPython==2.1.0
+javalang==0.10.1
+mongoengine==0.10.6
+pymongo==3.3.1
+six==1.10.0
+smmap2==2.0.1
