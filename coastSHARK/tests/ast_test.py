@@ -18,7 +18,9 @@ class HelloWorld(object):
 
 PYTHON2_TEST_FILE_CONTENT = """
 import sys
+import urlparse
 
+url = urlparse.urlparse('http://www.uni-goettingen.de')
 print "narf: %s" % ("narf2",)
 """
 
@@ -66,9 +68,9 @@ class TestAstExtraction(unittest.TestCase):
         eap = ExtractAstPython(py.name)
         eap.load()
 
-        node_count = 13
-        imports = ['sys']
-        wanted_type_counts = {'Load': 2, 'Str': 2, 'Module': 1, 'Call': 1, 'Name': 1, 'Tuple': 1, 'BinOp': 1, 'Expr': 1, 'Import': 1, 'Mod': 1, 'alias': 1}
+        node_count = 26
+        imports = ['sys', 'urllib.parse']  # urlparse => urllib.parse
+        wanted_type_counts = {'Store': 1, 'Attribute': 2, 'Assign': 1, 'Load': 5, 'Str': 3, 'Module': 1, 'Call': 2, 'Name': 3, 'Tuple': 1, 'BinOp': 1, 'Expr': 1, 'Import': 2, 'Mod': 1, 'alias': 2}
 
         type_counts = {k: 0 for k in PYTHON_NODE_TYPES}
         for k, v in wanted_type_counts.items():
