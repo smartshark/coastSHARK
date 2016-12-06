@@ -1,56 +1,282 @@
-from mongoengine import Document, StringField, DateTimeField, ListField, IntField, BooleanField, ObjectIdField, DictField
+from mongoengine import Document, StringField, ListField, DateTimeField, IntField, BooleanField, ObjectIdField, \
+    DictField
+
+
+class Project(Document):
+    meta = {
+        'indexes': [
+            '#name'
+        ],
+        'shard_key': ('name', ),
+    }
+
+    # PK: name
+    # Shard Key: hashed name
+    name = StringField(max_length=200, required=True, unique=True)
+
+
+class MailingList(Document):
+    meta = {
+        'indexes': [
+            '#name'
+        ],
+        'shard_key': ('name', ),
+    }
+
+    # PK: name
+    # Shard Key: hashed name
+
+    project_id = ObjectIdField(required=True)
+    name = StringField(required=True)
+    last_updated = DateTimeField()
+
+
+class Message(Document):
+    meta = {
+        'indexes': [
+            'message_id'
+        ],
+        'shard_key': ('message_id', 'mailing_list_id'),
+    }
+
+    # PK: message_id
+    # Shard Key: message_id, mailing_list_id
+
+    message_id = StringField(required=True, unique_with=['mailing_list_id'])
+    mailing_list_id = ObjectIdField(required=True)
+    reference_ids = ListField(ObjectIdField())
+    in_reply_to_id = ObjectIdField()
+    from_id = ObjectIdField()
+    to_ids = ListField(ObjectIdField())
+    cc_ids = ListField(ObjectIdField())
+    subject = StringField()
+    body = StringField()
+    date = DateTimeField()
+    patches = ListField(StringField())
+
+
+class IssueSystem(Document):
+    meta = {
+        'indexes': [
+            '#url'
+        ],
+        'shard_key': ('url', ),
+    }
+
+    # PK: url
+    # Shard Key: hashed url
+
+    project_id = ObjectIdField(required=True)
+    url = StringField(required=True)
+    last_updated = DateTimeField()
+
+
+class Issue(Document):
+    meta = {
+        'indexes': [
+            'external_id',
+            'issue_system_id'
+        ],
+        'shard_key': ('external_id', 'issue_system_id'),
+    }
+
+    # PK: external_id, issue_system_id
+    # Shard Key: external_id, issue_system_id
+
+    external_id = StringField(unique_with=['issue_system_id'])
+    issue_system_id = ObjectIdField(required=True)
+    title = StringField()
+    desc = StringField()
+    created_at = DateTimeField()
+    updated_at = DateTimeField()
+    creator_id = ObjectIdField()
+    reporter_id = ObjectIdField()
+
+    issue_type = StringField()
+    priority = StringField()
+    status = StringField()
+    affects_versions = ListField(StringField())
+    components = ListField(StringField())
+    labels = ListField(StringField())
+    resolution = StringField()
+    fix_versions = ListField(StringField())
+    assignee_id = ObjectIdField()
+    issue_links = ListField(DictField())
+    parent_issue_id = ObjectIdField()
+    original_time_estimate=IntField()
+    environment = StringField()
+
+    def __str__(self):
+        return "System_id: %s, issue_system_id: %s, title: %s, desc: %s, created_at: %s, updated_at: %s, issue_type: %s," \
+               " priority: %s, affects_versions: %s, components: %s, labels: %s, resolution: %s, fix_versions: %s," \
+               "assignee: %s, issue_links: %s, status: %s, time_estimate: %s, environment: %s, creator: %s, " \
+               "reporter: %s" % (
+            self.external_id, self.issue_system_id, self.title, self.desc, self.created_at, self.updated_at, self.issue_type,
+            self.priority, ','.join(self.affects_versions), ','.join(self.components), ','.join(self.labels),
+            self.resolution, ','.join(self.fix_versions), self.assignee_id, str(self.issue_links), self.status,
+            str(self.original_time_estimate), self.environment, self.creator_id, self.reporter_id
+        )
+
+
+class Event(Document):
+    STATI = (
+        ('created', 'The issue was created by the actor.'),
+        ('closed','The issue was closed by the actor. When the commit_id is present, it identifies the commit '
+                  'that closed the issue using "closes / fixes #NN" syntax.'),
+        ('reopened', 'The issue was reopened by the actor.'),
+        ('subscribed', 'The actor subscribed to receive notifications for an issue.'),
+        ('merged','The issue was merged by the actor. The `commit_id` attribute is the SHA1 of the HEAD '
+                  'commit that was merged.'),
+        ('referenced', 'The issue was referenced from a commit message. The `commit_id` attribute is the '
+                       'commit SHA1 of where that happened.'),
+        ('mentioned', 'The actor was @mentioned in an issue body.'),
+        ('assigned', 'The issue was assigned to the actor.'),
+        ('unassigned', 'The actor was unassigned from the issue.'),
+        ('labeled', 'A label was added to the issue.'),
+        ('unlabeled', 'A label was removed from the issue.'),
+        ('milestoned', 'The issue was added to a milestone.'),
+        ('demilestoned', 'The issue was removed from a milestone.'),
+        ('renamed', 'The issue title was changed.'),
+        ('locked', 'The issue was locked by the actor.'),
+        ('unlocked','The issue was unlocked by the actor.'),
+        ('head_ref_deleted', 'The pull requests branch was deleted.'),
+        ('head_ref_restored', 'The pull requests branch was restored.'),
+        ('description', 'The description was changed.'),
+        ('priority', 'The issue was added to a milestone.'),
+        ('status', 'The status was changed.'),
+        ('resolution', 'The resolution was changed.'),
+        ('issuetype','The issuetype was changed.'),
+        ('environment', 'The environment was changed.'),
+        ('timeoriginalestimate', 'The original time estimation for fixing the issue was changed.'),
+        ('version', 'The affected versions was changed.'),
+        ('component', 'The component list was changed.'),
+        ('labels', 'The labels of the issue were changed.'),
+        ('fix version', 'The fix versions of the issue were changed.'),
+        ('link', 'Issuelinks were added or deleted.'),
+        ('attachment','The attachments of the issue were changed.'),
+        ('release note', 'A release note was changed.'),
+        ('remoteissuelink', 'A remote link was added to the issue.'),
+        ('comment', 'A comment was deleted or added to the issue.'),
+        ('hadoop flags', 'Hadoop flags were change to the issue.'),
+        ('timeestimate', 'Time estimation was changed in the issue.'),
+        ('tags', 'Tags of the issue were changed.')
+    )
+
+    meta = {
+        'indexes': [
+            'issue_id',
+            '#external_id',
+            ('issue_id', '-created_at')
+        ],
+        'shard_key': ('external_id', 'issue_id'),
+    }
+
+    # PK: external_id, issue_id
+    # Shard Key: external_id, issue_id
+
+    external_id = StringField(unique_with=['issue_id'])
+    issue_id = ObjectIdField()
+    created_at = DateTimeField()
+    status = StringField(max_length=50, choices=STATI)
+    author_id = ObjectIdField()
+
+    old_value = StringField()
+    new_value = StringField()
+
+    def __str__(self):
+        return "external_id: %s, issue_id: %s, created_at: %s, status: %s, author_id: %s, " \
+               "old_value: %s, new_value: %s" % (
+                    self.external_id,
+                    self.issue_id,
+                    self.created_at,
+                    self.status,
+                    self.author_id,
+                    self.old_value,
+                    self.new_value
+               )
+
+
+class IssueComment(Document):
+    meta = {
+        'indexes': [
+            'issue_id',
+            '#external_id',
+            ('issue_id', '-created_at')
+        ],
+        'shard_key': ('external_id', 'issue_id'),
+    }
+
+    external_id = StringField(unique_with=['issue_id'])
+    issue_id = ObjectIdField()
+    created_at = DateTimeField()
+    author_id = ObjectIdField()
+    comment = StringField()
+
+    def __str__(self):
+        return "external_id: %s, issue_id: %s, created_at: %s, author_id: %s, comment: %s" % (
+            self.external_id, self.issue_id, self.created_at, self.author_id, self.comment
+        )
+
+
+class VCSSystem(Document):
+    meta = {
+        'collection': 'vcs_system',
+        'indexes': [
+            '#url'
+        ],
+        'shard_key': ('url', ),
+    }
+
+    # PK: url
+    # Shard Key: hashed url
+
+    url = StringField(required=True, unique=True)
+    project_id = ObjectIdField(required=True)
+    repository_type = StringField(required=True)
+    last_updated = DateTimeField()
 
 
 class FileAction(Document):
-    """ Document that inherits from :class:`mongoengine.Document`. Holds information for the fileaction collection.
 
-    :property projectId: id of the project, which belongs to the file action (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property fileId: id of the file, which belongs to the file action (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property revisionHash: hash of the revision (type: :class:`mongoengine.fields.StringField`)
-    :property mode: mode of the file action (type: :class:`mongoengine.fields.StringField`)
+    meta = {
+        'indexes': [
+            '#id',
+            'commit_id',
+            ('commit_id', 'file_id'),
+        ],
+        'shard_key': ('id',),
+    }
 
-        .. NOTE:: It can only be ("A")dded, ("D")eleted, ("M")odified, ("C")opied or Moved, "T" for links (special in git)
+    # PK: file_id, commit_id
+    # Shard Key: hashed id. Reasoning: The id is most likely the most queried part. Furthermore, a shard key consisting
+    # of commit_id and file_id would be very bad.
 
-    :property sizeAtCommit: size of the file on commit (type: :class:`mongoengine.fields.IntField`)
-    :property linesAdded: number of lines added in this action (type: :class:`mongoengine.fields.IntField`)
-    :property linesDeleted: number of lines deleted in this action (type: :class:`mongoengine.fields.IntField`)
-    :property isBinary: indicates if the file is a binary file or not (type: :class:`mongoengine.fields.BooleanField`)
-    :property oldFilePathId: object id of old file (if it was moved or copied) (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property hunkIds: list of ids to the different hunks of this action (type: :class:`mongoengine.fields.ListField(:class:`mongoengine.fields.ObjectIdField`)`)
-
-    .. NOTE:: Unique (or primary key) are the fields: projectId, fileId, and revisionHash.
-
-    .. NOTE:: oldFilePathId only exists, if the file was created due to a copy or move action
-
-
-    """
-    MODES = ('A', 'M', 'D', 'C', 'T')
-    # pk fileId, revisionhash, projectId
-    projectId = ObjectIdField(required=True, unique_with=['fileId', 'revisionHash'])
-    fileId = ObjectIdField(required=True, unique_with=['projectId', 'revisionHash'])
-    revisionHash = StringField(max_length=50, required=True, unique_with=['projectId', 'fileId'])
+    MODES = ('A', 'M', 'D', 'C', 'T', 'R')
+    file_id = ObjectIdField(required=True)
+    commit_id = ObjectIdField(required=True)
     mode = StringField(max_length=1, required=True, choices=MODES)
-    sizeAtCommit = IntField()
-    linesAdded = IntField()
-    linesDeleted = IntField()
-    isBinary = BooleanField()
+    size_at_commit = IntField()
+    lines_added = IntField()
+    lines_deleted = IntField()
+    is_binary = BooleanField()
 
-    # oldFilePathId is only set, if we detected a copy or move operation
-    oldFilePathId = ObjectIdField()
-    hunkIds = ListField(ObjectIdField())
+    # old_file_id is only set, if we detected a copy or move operation
+    old_file_id = ObjectIdField()
 
 
 class Hunk(Document):
-    """ Document that inherits from :class:`mongoengine.Document`. Holds information for the hunk collection.
-    :property new_start: new starting of the hunk in new file
-    :property new_lines: number of new lines
-    :property old_start: old start of the hunk in the old file
-    :property old_lines: old number of lines
-    :property content: content of the hunk.
 
-    For more information: https://en.wikipedia.org/wiki/Diff#Unified_format)
-    """
+    meta = {
+        'indexes': [
+            '#file_action_id',
+        ],
+        'shard_key': ('file_action_id',),
+    }
 
+    # PK: id
+    # Shard Key: file_action_id. Reasoning: file_action_id is most likely often queried
+
+    file_action_id = ObjectIdField()
     new_start = IntField(required=True)
     new_lines = IntField(required=True)
     old_start = IntField(required=True)
@@ -59,142 +285,174 @@ class Hunk(Document):
 
 
 class File(Document):
-    """ Document that inherits from :class:`mongoengine.Document`. Holds information for the file collection.
+    meta = {
+        'indexes': [
+            'vcs_system_id',
+        ],
+        'shard_key': ('path', 'vcs_system_id',),
+    }
 
-    :property projectId: id of the project, which belongs to the file action (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property path: path of the file (type: :class:`mongoengine.fields.StringField`)
-    :property name: name of the file (type: :class:`mongoengine.fields.StringField`)
+    # PK: path, vcs_system_id
+    # Shard Key: path, vcs_system_id
 
-    .. NOTE:: Unique (or primary key) are the fields: path, name, and projectId.
-    """
-
-    # PK path, name, projectId
-    projectId = ObjectIdField(required=True, unique_with=['path', 'name'])
-    path = StringField(max_length=300, required=True, unique_with=['projectId', 'name'])
-    name = StringField(max_length=100, required=True, unique_with=['path', 'projectId'])
+    vcs_system_id = ObjectIdField(required=True)
+    path = StringField(max_length=300, required=True,unique_with=['vcs_system_id'])
 
 
 class Tag(Document):
-    """ Document that inherits from :class:`mongoengine.Document`. Holds information for the tag collection.
+    meta = {
+        'indexes': [
+            'commit_id',
+            'name',
+            ('name', 'commit_id'),
+        ],
+        'shard_key': ('commit_id', 'name'),
+    }
 
-    :property projectId: id of the project, which belongs to the file action (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property name: name of the tag (type: :class:`mongoengine.fields.StringField`)
-    :property message: message of the tag (type: :class:`mongoengine.fields.StringField`)
-    :property taggerId: id of the person who created the tag (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property date: date of the creation of the tag (type: :class:`mongoengine.fields.DateTimeField`)
-    :property offset: offset of the tag creation date for timezones (type: :class:`mongoengine.fields.IntField`)
+    # PK: commit_id
+    # Shard Key: hashed commit_id
 
-    .. NOTE:: Unique (or primary key) are the fields: name and projectId.
-    """
-
-    # PK: project, name
-    projectId = ObjectIdField(required=True, unique_with=['name'])
-    name = StringField(max_length=150, required=True, unique_with=['projectId'])
+    name = StringField(max_length=150, required=True, unique_with=['commit_id'])
+    commit_id = ObjectIdField(required=True)
     message = StringField()
-    taggerId = ObjectIdField()
+    tagger_id = ObjectIdField()
     date = DateTimeField()
-    offset = IntField()
+    date_offset = IntField()
+
+    def __eq__(self,other):
+        return self.commit_id, self.name == other.commit_id, other.name
+
+    def __hash__(self):
+        return hash((self.commit_id, self.name))
 
 
 class People(Document):
-    """ Document that inherits from :class:`mongoengine.Document`. Holds information for the people collection.
-
-    :property name: name of the person (type: :class:`mongoengine.fields.StringField`)
-    :property email: email of the person (type: :class:`mongoengine.fields.StringField`)
-
-    .. NOTE:: Unique (or primary key) are the fields: name and email.
-    """
+    meta = {
+        'shard_key': ('email', 'name',)
+    }
 
     # PK: email, name
+    # Shard Key: email, name
+
     email = StringField(max_length=150, required=True, unique_with=['name'])
-    name = StringField(max_length=150, required=True, unique_with=['email'])
+    name = StringField(max_length=150, required=True)
+    username = StringField(max_length=300)
 
     def __hash__(self):
-        return hash(self.name + self.email)
-
-
-class Project(Document):
-    """ Document that inherits from :class:`mongoengine.Document`. Holds information for the project collection.
-
-    :property url: url to the project repository (type: :class:`mongoengine.fields.StringField`)
-    :property name: name of the project (type: :class:`mongoengine.fields.StringField`)
-    :property repositoryType: type of the repository (type: :class:`mongoengine.fields.StringField`)
-
-    .. NOTE:: Unique (or primary key) is the field url.
-    """
-
-    # PK uri
-    url = StringField(max_length=400, required=True, unique=True)
-    name = StringField(max_length=100, required=True)
-    repositoryType = StringField(max_length=15)
+        return hash(self.name+self.email)
 
 
 class Commit(Document):
-    """ Document that inherits from :class:`mongoengine.Document`. Holds information for the commit collection.
+    meta = {
+        'indexes': [
+            'vcs_system_id',
+        ],
+        'shard_key': ('revision_hash', 'vcs_system_id'),
+    }
 
-    :property projectId: id of the project, which belongs to the file action (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property revisionHash: revision hash of the commit (type: :class:`mongoengine.fields.StringField`)
-    :property branches: list of branches to which the commit belongs to (type: :class:`mongoengine.fields.ListField(:class:`mongoengine.fields.StringField`)`)
-    :property tagIds: list of tag ids, which belong to the commit (type: :class:`mongoengine.fields.ListField(:class:`mongoengine.fields.ObjectIdField`)`)
-    :property parents: list of parents of the commit (type: :class:`mongoengine.fields.ListField(:class:`mongoengine.fields.StringField`)`)
-    :property authorId: id of the author of the commit (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property authorDate: date when the commit was created (type: :class:`mongoengine.fields.DateTimeField`)
-    :property authorOffset: offset of the authorDate (type: :class:`mongoengine.fields.IntField`)
-    :property committerId: id of the committer of the commit (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property committerDate: date when the commit was committed (type: :class:`mongoengine.fields.DateTimeField`)
-    :property committerOffset: offset of the committerDate (type: :class:`mongoengine.fields.IntField`)
-    :property message: commit message (type: :class:`mongoengine.fields.StringField`)
-    :property fileActionIds: list of file action ids, which belong to the commit (type: :class:`mongoengine.fields.ListField(:class:`mongoengine.fields.ObjectIdField`)`)
+    # PK: revision_hash, vcs_system_id
+    # Shard Key: revision_hash, vcs_system_id
 
-    .. NOTE:: Unique (or primary key) are the fields projectId and revisionHash.
-    """
-
-    # PK: projectId and revisionhash
-    projectId = ObjectIdField(required=True, unique_with=['revisionHash'])
-    revisionHash = StringField(max_length=50, required=True, unique_with=['projectId'])
-    branches = ListField(StringField(max_length=100))
-    tagIds = ListField(ObjectIdField())
+    vcs_system_id = ObjectIdField(required=True)
+    revision_hash = StringField(max_length=50, required=True, unique_with=['vcs_system_id'])
+    branches = ListField(StringField(max_length=500))
     parents = ListField(StringField(max_length=50))
-    authorId = ObjectIdField()
-    authorDate = DateTimeField()
-    authorOffset = IntField()
-    committerId = ObjectIdField()
-    committerDate = DateTimeField()
-    committerOffset = IntField()
+    author_id = ObjectIdField()
+    author_date = DateTimeField()
+    author_date_offset = IntField()
+    committer_id = ObjectIdField()
+    committer_date = DateTimeField()
+    committer_date_offset = IntField()
     message = StringField()
-    fileActionIds = ListField(ObjectIdField())
-
-    def __str__(self):
-        return ""
 
 
-class Import(Document):
-    """Document that inherits from :class:`mongoengine.Document`.
-    Holds information for the imports of a specific file.
+class TestState(Document):
+    meta = {
+        'indexes': [
+            'commit_id',
+        ],
+        'shard_key': ('long_name', 'commit_id', 'file_id'),
+    }
 
-    :property commitId: id of the project, which belongs to the file action (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property fileId: id of the file, which belongs to the file action (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property name: name of the import (type: :class:`mongoengine.fields.ListField(:class:`mongoengine.fields.StringField`)`)
-    """
+    # PK: long_name, commit_id, file_id
+    # Shard Key: long_name, commit_id, file_id
 
-    # PK: commitId and fileId
-    commitId = ObjectIdField(required=True, unique_with=['fileId'])
-    fileId = ObjectIdField(required=True, unique_with=['commitId'])
-    imports = ListField(StringField(max_length=300))
+    long_name = StringField(required=True, unique_with=['commit_id', 'file_id'])
+    commit_id = ObjectIdField(required=True)
+    file_id = ObjectIdField(required=True)
+    file_type = StringField()
+    depends_on_ids = ListField(ObjectIdField())
+    direct_imp_ids = ListField(ObjectIdField())
+    mock_cut_dep_ids = ListField(ObjectIdField())
+    mocked_modules_ids = ListField(ObjectIdField())
+    uses_mock = BooleanField()
+    error = BooleanField()
 
 
-class NodeTypeCount(Document):
-    """Document that inherits from :class:`mongoengine.Document`.
-    Contains AST Node Types for Python.
 
-    :property commitId: id of the commit, which belongs to the file action (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property fileId: id of the file, which belongs to the file action (type: :class:`mongoengine.fields.ObjectIdField`)
-    :property nodeCount: number of AST nodes (type: :class:`mongoengine.fields.IntField`)
-    :property nodeTypeCounts: AST nodes and their respective counts for this file (type: :class:`mongoengine.fields.DictField`)
-    """
+class CodeEntityState(Document):
+    meta = {
+        'indexes': [
+            'commit_id',
+            'file_id',
+        ],
+        'shard_key': ('long_name', 'commit_id', 'file_id'),
+    }
 
-    # PK: commitId and fileId
-    commitId = ObjectIdField(required=True, unique_with=['fileId'])
-    fileId = ObjectIdField(required=True, unique_with=['commitId'])
-    nodeCount = IntField()  # full number of nodes
-    nodeTypeCounts = DictField()  # every node with its number for this file
+    # PK: long_name, commit_id, file_id
+    # Shard Key: long_name, commit_id, file_id
+
+    long_name = StringField(required=True, unique_with=['commit_id', 'file_id'])
+    commit_id = ObjectIdField(required=True)
+    file_id = ObjectIdField(required=True)
+    ce_parent_id = ObjectIdField()
+    cg_ids = ListField(ObjectIdField())
+    ce_type = StringField()
+    start_line = IntField()
+    end_line = IntField()
+    start_column = IntField()
+    end_column = IntField()
+    metrics = DictField()
+    imports = ListField(StringField())
+
+
+class CodeGroupState(Document):
+    meta = {
+        'indexes': [
+            'commit_id'
+        ],
+        'shard_key': ('long_name', 'commit_id'),
+    }
+
+    # PK: long_name, commit_id
+    # Shard Key: long_name, commit_id
+
+    long_name = StringField(require=True, unique_with=['commit_id'])
+    commit_id = ObjectIdField(required=True)
+    cg_parent_ids = ListField(ObjectIdField())
+    cg_type = StringField()
+    metrics = DictField()
+
+
+class CloneInstance(Document):
+    meta = {
+        'indexes': [
+            'commit_id',
+            'file_id',
+        ],
+        'shard_key': ('name', 'commit_id', 'file_id'),
+    }
+
+    # PK: name, commit_id, file_id
+    # Shard Key: name, commit_id, file_id
+
+    name = StringField(required=True, unique_with=['commit_id', 'file_id'])
+    commit_id = ObjectIdField(required=True)
+    file_id = ObjectIdField(required=True)
+    start_line = IntField(required=True)
+    end_line = IntField(required=True)
+    start_column = IntField(required=True)
+    end_column = IntField(required=True)
+    clone_instance_metrics = DictField(required=True)
+    clone_class = StringField(required=True)
+    clone_class_metrics = DictField(required=True)

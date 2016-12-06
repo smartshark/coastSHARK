@@ -5,10 +5,15 @@ import argparse
 import tempfile
 import subprocess
 
-from coastSHARK.smartshark_plugin import main as coast
-
+from mongoengine import connect
 from git import Repo
 
+from coastSHARK.smartshark_plugin import main as coast
+from coastSHARK.util.mongomodels import Project  # we need to create the project first if it is new
+
+# todo:
+# - clean up self_args and redundancies
+# - centralize configuration parameters
 
 class GitScrape(object):
 
@@ -23,6 +28,13 @@ class GitScrape(object):
             Repo.clone_from(args.url, self._path)
         self._repo = Repo(self._path)
         self._args = args
+        self._name = args.name
+
+        self._create_project(args.name)
+
+    def _create_project(self, name):
+        connect(host='localhost', port=27017, db='smartshark2', username='root', password='balla', authentication_source='smartshark2')
+        Project.objects(name=name).upsert_one(name=name)
 
     def _checkout_revision(self, revision):
         self._repo.git.checkout(revision)
@@ -30,16 +42,17 @@ class GitScrape(object):
     def _run_programs_repo(self):
         args = {'db_hostname': 'localhost',
                 'db_port': 27017,
-                'db_database': 'smartshark',
+                'db_database': 'smartshark2',
                 'db_user': 'root',
                 'db_password': 'balla',
-                'db_authentication': 'smartshark',
+                'db_authentication': 'smartshark2',
                 'url': self._args.url,
-                'input': self._path
+                'input': self._path,
+                'name': self._name,
                 }
 
         pbin = '/srv/www/vcsSHARK/bin/python'
-        cmd = [pbin, '/srv/www/vcsSHARK/vcsshark.py', '-D', 'mongo', '-U', args['db_user'], '-P', args['db_password'], '-DB', args['db_database'], '-H', args['db_hostname'], '-a', args['db_authentication'], '-u', self._path]
+        cmd = [pbin, '/srv/www/vcsSHARK/vcsshark.py', '-D', 'mongo', '-U', args['db_user'], '-P', args['db_password'], '-DB', args['db_database'], '-H', args['db_hostname'], '-a', args['db_authentication'], '--path', self._path, '-n', self._name]
 
         out = subprocess.check_output(cmd)
         print(out)
@@ -47,10 +60,10 @@ class GitScrape(object):
     def _run_programs_rev(self, revision):
         args = {'db_hostname': 'localhost',
                 'db_port': 27017,
-                'db_database': 'smartshark',
+                'db_database': 'smartshark2',
                 'db_user': 'root',
                 'db_password': 'balla',
-                'db_authentication': 'smartshark',
+                'db_authentication': 'smartshark2',
                 'url': self._args.url,
                 'rev': revision.hexsha,
                 'input': self._path
@@ -61,7 +74,25 @@ class GitScrape(object):
         for k, v in args.items():
             setattr(tmp, k, v)
 
-        print('running for: {}'.format(tmp.rev))
+
+        print('running mecoSHARK for: {}'.format(tmp.rev))
+        pbin = '/srv/www/mecoSHARK/bin/python'
+        cmd = [pbin,
+               '/srv/www/mecoSHARK/main.py',
+               '-U', args['db_user'],
+               '-P', args['db_password'],
+               '-DB', args['db_database'],
+               '-H', args['db_hostname'],
+               '-a', args['db_authentication'],
+               '-i', args['input'],
+               '-o', args['input'],
+               '-r', args['rev'],
+               '-u', args['url']]
+        out = subprocess.check_output(cmd)
+        print(out)
+
+        # now the real deal
+        print('running coastSHARK for: {}'.format(tmp.rev))
         coast(tmp)
 
     def run(self):
@@ -77,5 +108,6 @@ if __name__ == '__main__':
     parser.add_argument('-m', '--max_count', help='Max number of Revisions', default=None)
     parser.add_argument('-u', '--url', help='URL of the Repo', required=True)
     parser.add_argument('-p', '--path', help='Persistent path of working dir for Repos.')
+    parser.add_argument('-n', '--name', help='Project Name')
     g = GitScrape(parser.parse_args())
     g.run()

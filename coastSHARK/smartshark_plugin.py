@@ -50,6 +50,7 @@ def main(args):
                     m.write_imports(mongo_filepath, e.imports)
                     m.write_node_type_counts(mongo_filepath, e.node_count, e.type_counts)
             except error.ParserException as e:
+                # print(e)
                 pass
             except Exception as e:
                 print(type(e))
