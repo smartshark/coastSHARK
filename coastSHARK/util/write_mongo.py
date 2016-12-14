@@ -24,10 +24,10 @@ class MongoDb(object):
         CodeEntityState.objects(commit_id=c.id, file_id=f.id, long_name=filepath).upsert_one(imports=imports)
 
     def write_node_type_counts(self, filepath, node_count, node_type_counts):
-        tmp = {'node_count': node_count, 'node_type_counts': node_type_counts}
+        # tmp = {'node_count': node_count, 'node_type_counts': node_type_counts}
 
         vcs = VCSSystem.objects.get(url=self.vcs_url)
         c = Commit.objects.get(revision_hash=self.revision, vcs_system_id=vcs.id)
         f = File.objects.get(path=filepath, vcs_system_id=vcs.id)
 
-        CodeEntityState.objects(commit_id=c.id, file_id=f.id, long_name=filepath).upsert_one(metrics=tmp)
+        CodeEntityState.objects(commit_id=c.id, file_id=f.id, long_name=filepath).upsert_one(set__metrics__node_count=node_count, set__metrics__node_type_counts=node_type_counts)
