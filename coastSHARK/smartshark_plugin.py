@@ -5,9 +5,9 @@
 import argparse
 import os
 
-from .util import error
-from .util.extract_ast import ExtractAstPython, ExtractAstJava
-from .util.write_mongo import MongoDb
+from util import error
+from util.extract_ast import ExtractAstPython, ExtractAstJava
+from util.write_mongo import MongoDb
 
 
 def main(args):
