@@ -30,4 +30,7 @@ class MongoDb(object):
         c = Commit.objects.get(revision_hash=self.revision, vcs_system_id=vcs.id)
         f = File.objects.get(path=filepath, vcs_system_id=vcs.id)
 
-        CodeEntityState.objects(commit_id=c.id, file_id=f.id, long_name=filepath).upsert_one(set__metrics__node_count=node_count, set__metrics__node_type_counts=node_type_counts)
+        tmp = {'set__metrics__{}'.format(k) : v for k, v in node_type_counts.items()}
+        tmp['set__metrics__node_count'] = node_count
+
+        CodeEntityState.objects(commit_id=c.id, file_id=f.id, long_name=filepath).upsert_one(**tmp)

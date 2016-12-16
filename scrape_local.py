@@ -33,7 +33,7 @@ class GitScrape(object):
         self._create_project(args.name)
 
     def _create_project(self, name):
-        connect(host='localhost', port=27017, db='smartshark2', username='root', password='balla', authentication_source='smartshark2')
+        connect(host='localhost', port=27017, db='smartshark4', username='root', password='balla', authentication_source='smartshark4')
         Project.objects(name=name).upsert_one(name=name)
 
     def _checkout_revision(self, revision):
@@ -42,10 +42,10 @@ class GitScrape(object):
     def _run_programs_repo(self):
         args = {'db_hostname': 'localhost',
                 'db_port': 27017,
-                'db_database': 'smartshark2',
+                'db_database': 'smartshark4',
                 'db_user': 'root',
                 'db_password': 'balla',
-                'db_authentication': 'smartshark2',
+                'db_authentication': 'smartshark4',
                 'url': self._args.url,
                 'input': self._path,
                 'name': self._name,
@@ -60,10 +60,10 @@ class GitScrape(object):
     def _run_programs_rev(self, revision):
         args = {'db_hostname': 'localhost',
                 'db_port': 27017,
-                'db_database': 'smartshark2',
+                'db_database': 'smartshark4',
                 'db_user': 'root',
                 'db_password': 'balla',
-                'db_authentication': 'smartshark2',
+                'db_authentication': 'smartshark4',
                 'url': self._args.url,
                 'rev': revision.hexsha,
                 'input': self._path
