@@ -61,8 +61,8 @@ def main(args):
 if __name__ == '__main__':
     # we basically use vcsSHARK argparse config
     parser = argparse.ArgumentParser(description='Analyze the given URI. An URI should be a checked out GIT Repository.')
-    parser.add_argument('-U', '--db-user', help='Database user name', default='root')
-    parser.add_argument('-P', '--db-password', help='Database user password', default='root')
+    parser.add_argument('-U', '--db-user', help='Database user name', default=None)
+    parser.add_argument('-P', '--db-password', help='Database user password', default=None)
     parser.add_argument('-DB', '--db-database', help='Database name', default='vcsshark')
     parser.add_argument('-H', '--db-hostname', help='Name of the host, where the database server is running', default='localhost')
     parser.add_argument('-p', '--db-port', help='Port, where the database server is listening', default=27017, type=int)

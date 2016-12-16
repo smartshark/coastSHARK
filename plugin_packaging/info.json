@@ -12,6 +12,7 @@
             "version": "0.10"
         }
     ],
+    "created_collections": [],
     "arguments": [
         {
             "name": "plugin_path",

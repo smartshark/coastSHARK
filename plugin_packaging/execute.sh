@@ -9,6 +9,23 @@ cp -R $REPOSITORY_PATH "/dev/shm/$NEW_UUID"
 cd "/dev/shm/$NEW_UUID"
 git checkout $1 --quiet
 
-python3.5 $PLUGIN_PATH/smartshark_plugin.py --url $4 -U $5 -P $6 -DB $7 -H $8 -p $9 -r $1 -a ${10} -i "/dev/shm/$NEW_UUID/"
+COMMAND="python3.5 $PLUGIN_PATH/smartshark_plugin.py --url $4 -DB $7 -H $8 -p $9 -r $1 -i /dev/shm/$NEW_UUID/"
+
+
+if [ ! -z ${5+x} ] && [ ${5} != "None" ]; then
+	COMMAND="$COMMAND --db-user ${5}"
+fi
+
+if [ ! -z ${6+x} ] && [ ${6} != "None" ]; then
+	COMMAND="$COMMAND --db-password ${6}"
+fi
+
+if [ ! -z ${10+x} ] && [ ${10} != "None" ]; then
+	COMMAND="$COMMAND --db-authentication ${10}"
+fi
+
+$COMMAND
+
+
 
 rm -rf "/dev/shm/$NEW_UUID"
