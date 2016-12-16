@@ -16,7 +16,7 @@ setup(
     author='atrautsch',
     author_email='alexander.trautsch@stud.uni-goettingen.de',
     url='https://github.com/smartshark/coastSHARK',
-    download_url='https://github.com/smartshark/coastSHARK/repository/archive.tar.gz?ref=release',
+    download_url='https://github.com/smartshark/coastSHARK/tarball/master',
     test_suite='coastSHARK.tests',
     packages=find_packages(),
     zip_safe=False,
