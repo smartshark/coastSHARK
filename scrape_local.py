@@ -8,12 +8,8 @@ import subprocess
 from mongoengine import connect
 from git import Repo
 
-#from coastSHARK.smartshark_plugin import main as coast
 from coastSHARK.util.mongomodels import Project  # we need to create the project first if it is new
 
-# todo:
-# - clean up self_args and redundancies
-# - centralize configuration parameters
 
 class GitScrape(object):
 
@@ -30,22 +26,30 @@ class GitScrape(object):
         self._args = args
         self._name = args.name
 
+        self._host = 'localhost'
+        self._port = 27017
+        self._db = 'smartshark4'
+        self._user = 'root'
+        self._password = 'balla'
+        self._authsource = 'smartshark4'
+
         self._create_project(args.name)
 
     def _create_project(self, name):
-        connect(host='localhost', port=27017, db='smartshark4', username='root', password='balla', authentication_source='smartshark4')
+        connect(host=self._host, port=self._port, db=self._db, username=self._user, password=self._password, authentication_source=self._authsource)
         Project.objects(name=name).upsert_one(name=name)
 
     def _checkout_revision(self, revision):
         self._repo.git.checkout(revision)
 
     def _run_programs_repo(self):
-        args = {'db_hostname': 'localhost',
-                'db_port': 27017,
-                'db_database': 'smartshark4',
-                'db_user': 'root',
-                'db_password': 'balla',
-                'db_authentication': 'smartshark4',
+        """Run programs once per repository."""
+        args = {'db_hostname': self._host,
+                'db_port': self._port,
+                'db_database': self._db,
+                'db_user': self._user,
+                'db_password': self._password,
+                'db_authentication': self._authsource,
                 'url': self._args.url,
                 'input': self._path,
                 'name': self._name,
@@ -58,12 +62,13 @@ class GitScrape(object):
         print(out)
 
     def _run_programs_rev(self, revision):
-        args = {'db_hostname': 'localhost',
-                'db_port': 27017,
-                'db_database': 'smartshark4',
-                'db_user': 'root',
-                'db_password': 'balla',
-                'db_authentication': 'smartshark4',
+        """Run programs once per revision."""
+        args = {'db_hostname': self._host,
+                'db_port': self._port,
+                'db_database': self._db,
+                'db_user': self._user,
+                'db_password': self._password,
+                'db_authentication': self._authsource,
                 'url': self._args.url,
                 'rev': revision.hexsha,
                 'input': self._path
@@ -73,7 +78,6 @@ class GitScrape(object):
         tmp = argparse.Namespace()
         for k, v in args.items():
             setattr(tmp, k, v)
-
 
         print('running mecoSHARK for: {}'.format(tmp.rev))
         pbin = '/srv/www/mecoSHARK/bin/python'
@@ -106,7 +110,6 @@ class GitScrape(object):
                '-u', args['url']]
         out = subprocess.check_output(cmd)
         print(out)
-
 
     def run(self):
         self._run_programs_repo()

@@ -11,6 +11,7 @@ from util.write_mongo import MongoDb
 
 
 def main(args):
+    # unused for now
     ignore_files = []
     ignore_dirs = []
 
@@ -26,7 +27,7 @@ def main(args):
 
     for root, dirs, files in os.walk(args.input):
 
-        if root.replace(args.input, '') in ignore_dirs:  # subtract base_dir then match agains ignore_list
+        if root.replace(args.input, '') in ignore_dirs:  # subtract base_dir then match against ignore_list
             continue
 
         for file in files:

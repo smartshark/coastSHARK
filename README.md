@@ -5,12 +5,12 @@ Collect AST Information for smartSHARK.
 
 ### via PIP
 ```bash
-pip install https://github.com/smartshark/coastSHARK/zipball/master
+pip install https://github.com/smartshark/coastSHARK/zipball/master --process-dependency-links
 ```
 
 ### via setup.py
 ```bash
-python setup.py install
+python setup.py install --process-dependency-links
 ```
 
 ## Run Tests

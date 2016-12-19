@@ -1,7 +1,6 @@
-import os
 
 from mongoengine import *
-from .mongomodels import VCSSystem, File, Commit, CodeEntityState
+from pycoshark.mongomodels import VCSSystem, File, Commit, CodeEntityState
 
 # todo: extract our models from mongomodels, just use mongomodels
 
@@ -30,7 +29,7 @@ class MongoDb(object):
         c = Commit.objects.get(revision_hash=self.revision, vcs_system_id=vcs.id)
         f = File.objects.get(path=filepath, vcs_system_id=vcs.id)
 
-        tmp = {'set__metrics__{}'.format(k) : v for k, v in node_type_counts.items()}
+        tmp = {'set__metrics__{}'.format(k): v for k, v in node_type_counts.items()}
         tmp['set__metrics__node_count'] = node_count
 
         CodeEntityState.objects(commit_id=c.id, file_id=f.id, long_name=filepath).upsert_one(**tmp)
