@@ -13,7 +13,7 @@ setup(
     version='1.0.0',
     description='Collect AST Information for smartSHARK.',
     install_requires=['javalang', 'mongoengine', 'pymongo', 'pycoshark>=1.0.0'],
-    dependency_links=['https://github.com/smartshark/pycoSHARK/archive/1.0.0.zip#egg=pycoshark-1.0.0'],
+    dependency_links=['git+https://github.com/smartshark/pycoSHARK.git@1.0.0#egg=pycoshark-1.0.0'],
     author='atrautsch',
     author_email='alexander.trautsch@stud.uni-goettingen.de',
     url='https://github.com/smartshark/coastSHARK',
