@@ -8,7 +8,7 @@ import subprocess
 from mongoengine import connect
 from git import Repo
 
-from coastSHARK.smartshark_plugin import main as coast
+#from coastSHARK.smartshark_plugin import main as coast
 from coastSHARK.util.mongomodels import Project  # we need to create the project first if it is new
 
 # todo:
@@ -93,7 +93,20 @@ class GitScrape(object):
 
         # now the real deal
         print('running coastSHARK for: {}'.format(tmp.rev))
-        coast(tmp)
+        pbin = '/srv/www/coastSHARK/bin/python'
+        cmd = [pbin,
+               '/srv/www/coastSHARK/coastSHARK/smartshark_plugin.py',
+               '-U', args['db_user'],
+               '-P', args['db_password'],
+               '-DB', args['db_database'],
+               '-H', args['db_hostname'],
+               '-a', args['db_authentication'],
+               '-i', args['input'],
+               '-r', args['rev'],
+               '-u', args['url']]
+        out = subprocess.check_output(cmd)
+        print(out)
+
 
     def run(self):
         self._run_programs_repo()

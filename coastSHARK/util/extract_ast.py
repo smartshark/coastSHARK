@@ -1,6 +1,6 @@
 import ast
 
-from lib2to3 import refactor
+from lib2to3 import refactor, pgen2
 
 import javalang
 from . import error
@@ -191,13 +191,17 @@ class ExtractAstPython(object):
         self.filename = filename
 
     def load(self):
-        with open(self.filename, 'r') as f:
-            self.astdata = ast.parse(source=convert_2to3(f.read(), self.filename), filename=self.filename)
+        try:
+            with open(self.filename, 'r') as f:
+                self.astdata = ast.parse(source=convert_2to3(f.read(), self.filename), filename=self.filename)
 
-        assert self.astdata is not None
+            assert self.astdata is not None
 
-        self.nt = NodeTypeCountVisitor()
-        self.nt.visit(self.astdata)
+            self.nt = NodeTypeCountVisitor()
+            self.nt.visit(self.astdata)
+        except pgen2.parse.ParseError as e:
+            err = 'Parser Error in file: {}'.format(self.filename)
+            raise error.ParserException(err)
 
     @property
     def imports(self):
