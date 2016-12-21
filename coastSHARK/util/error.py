@@ -1,6 +1,6 @@
 class CoastException(Exception):
-	pass
+    pass
 
 
 class ParserException(CoastException):
-	pass
+    pass

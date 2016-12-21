@@ -4,10 +4,25 @@
 
 import argparse
 import os
+import sys
+import logging
+import timeit
 
 from util import error
 from util.extract_ast import ExtractAstPython, ExtractAstJava
 from util.write_mongo import MongoDb
+
+# set up logging
+log = logging.getLogger()
+log.setLevel(logging.INFO)
+i = logging.StreamHandler(sys.stdout)
+e = logging.StreamHandler(sys.stderr)
+
+i.setLevel(logging.INFO)
+e.setLevel(logging.ERROR)
+
+log.addHandler(i)
+log.addHandler(e)
 
 
 def main(args):
@@ -21,9 +36,14 @@ def main(args):
     if not os.access(args.input, os.R_OK):
         raise Exception('--input {} is not readable'.format(args.input))
 
+    # timing
+    start = timeit.default_timer()
+
     # check mongodb connectivity
     m = MongoDb(args.db_hostname, args.db_port, args.db_database, args.db_user, args.db_password, args.db_authentication, args.url, args.rev)
     m.connect()
+
+    log.info("Starting AST Extraction")
 
     for root, dirs, files in os.walk(args.input):
 
@@ -50,13 +70,17 @@ def main(args):
                     e.load()
                     m.write_imports(mongo_filepath, e.imports)
                     m.write_node_type_counts(mongo_filepath, e.node_count, e.type_counts)
+            # this is not critical, we can still do the other files
             except error.ParserException as e:
-                # print(e)
+                log.error(str(e))
                 pass
+            # this is critical
             except Exception as e:
-                print(type(e))
-                print(e)
+                log.exception(e)
                 raise
+
+    end = timeit.default_timer() - start
+    log.info("Finished AST Extraction in {.5f}s".format(end))
 
 
 if __name__ == '__main__':

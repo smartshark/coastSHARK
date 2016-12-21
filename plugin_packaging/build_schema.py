@@ -11,6 +11,7 @@ import json
 from util.mongomodels import CodeEntityState
 from util.extract_ast import PYTHON_NODE_TYPES, JAVA_NODE_TYPES
 
+
 def main():
 
     java_desc = 'Occurences of this Java Node Type in the AST of the file.'
@@ -35,7 +36,6 @@ def main():
             continue  # we already have double nodes
 
         fields.append({'type': 'IntegerType', 'logical_type': ['ProductMetric', 'ASTNodeType', 'Java'], 'field_name': nt, 'desc': java_desc})
-
 
     schema = {'plugin': 'coastSHARK_1.00',
               'collections': [
