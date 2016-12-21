@@ -80,7 +80,7 @@ def main(args):
                 raise
 
     end = timeit.default_timer() - start
-    log.info("Finished AST Extraction in {.5f}s".format(end))
+    log.info("Finished AST Extraction in {:.5f}s".format(end))
 
 
 if __name__ == '__main__':
