@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
-"""Rewrites schema.json according to the MongoDB Models and special types we defined."""
-
-# we know where we are
-import sys
-sys.path.insert(0, '../coastSHARK/')
+"""Helper which rewrites schema.json."""
 
 import json
+import sys
 
-from util.mongomodels import CodeEntityState
+# we know where we are
+sys.path.insert(0, '../coastSHARK/')
+
 from util.extract_ast import PYTHON_NODE_TYPES, JAVA_NODE_TYPES
 
 
