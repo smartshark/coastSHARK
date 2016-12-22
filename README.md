@@ -10,7 +10,7 @@ pip install https://github.com/smartshark/coastSHARK/zipball/master --process-de
 
 ### via setup.py
 ```bash
-python setup.py install --process-dependency-links
+python setup.py install
 ```
 
 ## Run Tests
