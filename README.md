@@ -1,4 +1,6 @@
 # coastSHARK
+[![Build Status](https://travis-ci.org/smartshark/coastSHARK.svg?branch=master)](https://travis-ci.org/smartshark/coastSHARK)
+
 Collect AST Information for smartSHARK.
 
 Currently Java and Python are supported.
