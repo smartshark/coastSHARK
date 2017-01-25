@@ -12,7 +12,7 @@ from util import error
 from util.extract_ast import ExtractAstPython, ExtractAstJava
 from util.write_mongo import MongoDb
 
-# set up logging
+# set up logging, we log to everything to stdout except for errors which go to stderr
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 i = logging.StreamHandler(sys.stdout)
@@ -43,7 +43,7 @@ def main(args):
     m = MongoDb(args.db_hostname, args.db_port, args.db_database, args.db_user, args.db_password, args.db_authentication, args.url, args.rev)
     m.connect()
 
-    log.info("Starting AST Extraction")
+    log.info("Starting AST extraction")
 
     for root, dirs, files in os.walk(args.input):
 
@@ -80,11 +80,11 @@ def main(args):
                 raise
 
     end = timeit.default_timer() - start
-    log.info("Finished AST Extraction in {:.5f}s".format(end))
+    log.info("Finished AST extraction in {:.5f}s".format(end))
 
 
 if __name__ == '__main__':
-    # we basically use vcsSHARK argparse config
+    # we basically re-use the vcsSHARK argparse config here
     parser = argparse.ArgumentParser(description='Analyze the given URI. An URI should be a checked out GIT Repository.')
     parser.add_argument('-U', '--db-user', help='Database user name', default=None)
     parser.add_argument('-P', '--db-password', help='Database user password', default=None)

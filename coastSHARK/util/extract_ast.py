@@ -8,7 +8,6 @@ from . import error
 # for python
 # https://docs.python.org/3/library/ast.html
 # node types from: http://greentreesnakes.readthedocs.io/en/latest/nodes.html
-
 PYTHON_NODE_TYPES = ['Num', 'Str', 'Bytes', 'List', 'Tuple', 'Set', 'Dict', 'Ellipsis', 'NameConstant', 'Name', 'Load', 'Store', 'Del', 'Starred', 'Expr', 'UnaryOp', 'UAdd', 'USub', 'Not', 'Invert', 'BinOp', 'Add', 'Sub', 'Mult', 'Div', 'FloorDiv', 'Mod', 'Pow', 'LShift', 'RShift', 'BitOr', 'BitXor', 'BitAnd', 'MatMult', 'BoolOp', 'And', 'Or', 'Compare', 'Eq', 'NotEq', 'Lt', 'LtE', 'Gt', 'GtE', 'Is', 'IsNot', 'In', 'NotIn', 'Call', 'keyword', 'IfExp', 'Attribute', 'Subscript', 'Index', 'Slice', 'ExtSlice', 'ListComp', 'SetComp', 'GeneratorExp', 'DictComp', 'comprehension', 'Assign', 'AugAssign', 'Print', 'Raise', 'Assert', 'Delete', 'Pass', 'Import', 'ImportFrom', 'alias', 'Module']
 
 # control flow
@@ -17,22 +16,8 @@ PYTHON_NODE_TYPES += ['If', 'For', 'While', 'Break', 'Continue', 'Try', 'TryFina
 # function and class defs
 PYTHON_NODE_TYPES += ['FunctionDef', 'Lambda', 'arguments', 'arg', 'Return', 'Yield', 'YieldFrom', 'Global', 'Nonlocal', 'ClassDef']
 
-# new async stuff
+# new async stuff (python 3.5)
 PYTHON_NODE_TYPES += ['AsyncFunctionDef', 'Await', 'AsyncFor', 'AsyncWith']
-
-
-# for java
-# node types from: Zimmermann et al.
-JAVA_NODE_TYPES = [
-    'AnnotationTypeDeclaration', 'AnnotationTypeMemberDeclaration', 'AnonymousClassDeclaration', 'ArrayAccess', 'ArrayCreation', 'ArrayInitializer', 'ArrayType', 'AssertStatement', 'Assignment', 'Block', 'BlockComment',
-    'BooleanLiteral', 'BreakStatement', 'CastExpression', 'CatchClause', 'CharacterLiteral', 'ClassInstanceCreation', 'CompilationUnit', 'ConditionalExpression', 'ConstructorInvocation', 'ContinueStatement', 'DoStatement', 'EmptyStatement',
-    'EnhancedForStatement', 'EnumConstantDeclaration', 'EnumDeclaration', 'ExpressionStatement', 'FieldAccess', 'FieldDeclaration', 'ExpressionStatement', 'FieldAccess', 'FieldDeclaration', 'ForStatement', 'IfStatement', 'ImportDeclaration',
-    'InfixExpression', 'Initializer', 'InstanceofExpression', 'Javadoc', 'LabeledStatement', 'LineComment', 'MarkerAnnotation', 'MemberRef', 'MemberValuePair', 'MethodDeclaration', 'MethodInvocation', 'MethodRef', 'MethodRefParameter',
-    'Modifier', 'NormalAnnotation', 'NullLiteral', 'NumberLiteral', 'PackageDeclaration', 'ParametrizedType', 'ParametrizedExpression', 'PostfixExpression', 'PrefixExpression', 'PrimitiveType', 'QualifiedName', 'QualifiedType',
-    'ReturnStatement', 'SimpleName', 'SimpleType', 'SingleMemberAnnotation', 'SingleVariableDeclaration', 'StringLiteral', 'SuperConstructorInvocation', 'SuperFieldAccess', 'SuperMethodInvocation', 'SwitchCase', 'SwitchStatement',
-    'SynchronizedStatement', 'TagElement', 'TextElement', 'ThisExpression', 'ThrowStatement', 'TryStatement', 'TypeDeclaration', 'TypeDeclarationStatement', 'TypeLiteral', 'TypeParameter', 'VariableDeclarationExpression',
-    'VariableDeclarationFragment', 'VariableDeclarationStatement', 'WhileStatement', 'WildcardType'
-]
 
 # for java
 # node types from: https://github.com/c2nes/javalang/blob/master/javalang/tree.py
@@ -67,8 +52,9 @@ def convert_2to3(file_content, file_name):
 
 
 class NodePathVisitor(object):
-    """
-    Overwrite ast.NodeVisitor because we also want the level for pretty printing
+    """Overwrite ast.NodeVisitor because we also want the level for pretty printing.
+
+    This just includes the level for the NodePrintVisitor.
     """
 
     def visit(self, node, level=0):

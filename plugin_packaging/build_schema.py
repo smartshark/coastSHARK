@@ -5,7 +5,7 @@
 import json
 import sys
 
-# we know where we are
+# we know where we are, we need this for the import below
 sys.path.insert(0, '../coastSHARK/')
 
 from util.extract_ast import PYTHON_NODE_TYPES, JAVA_NODE_TYPES
@@ -13,11 +13,12 @@ from util.extract_ast import PYTHON_NODE_TYPES, JAVA_NODE_TYPES
 
 def main():
 
-    java_desc = 'Occurences of this Java Node Type in the AST of the file.'
-    python_desc = 'Occurences of this Python Node Type in the AST of the file.'
-    both_desc = 'Occurences of this Java and Python Node Type in the AST of the file.'
+    java_desc = 'Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py'
+    python_desc = 'Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html'
+    both_desc = 'Occurrences of this Java and Python Node Type in the AST of the file.'
+    node_count_desc = 'Number of AST Nodes in the file.'
 
-    # each AST node type has a field with its number of occurences in the file
+    # each AST node type has a field with its number of occurrences in the file
     fields = []
     for nt in PYTHON_NODE_TYPES:
         logical_type = ['ProductMetric', 'ASTNodeType', 'Python']
@@ -35,6 +36,9 @@ def main():
             continue  # we already have double nodes
 
         fields.append({'type': 'IntegerType', 'logical_type': ['ProductMetric', 'ASTNodeType', 'Java'], 'field_name': nt, 'desc': java_desc})
+
+    # we also have tho complete number of nodes
+    fields.append({'type': 'IntegerType', 'logical_type': ['ProductMetric', 'ASTNodeType', 'Java', 'Python'], 'field_name': 'node_count', 'desc': node_count_desc})
 
     schema = {'plugin': 'coastSHARK_1.00',
               'collections': [
