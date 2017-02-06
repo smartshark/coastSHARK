@@ -1,7 +1,4 @@
-gitdb2==2.0.0
-GitPython==2.1.0
-javalang==0.10.1
-mongoengine==0.10.6
-pymongo==3.3.1
-six==1.10.0
-smmap2==2.0.1
+javalang
+mongoengine
+pymongo
+git+https://github.com/smartshark/pycoSHARK.git@1.0.0#egg=pycoshark-1.0.0
