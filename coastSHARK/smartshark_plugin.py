@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Plugin for smartSHARK"""
+"""Plugin for execution with serverSHARK."""
 
 import argparse
 import os
@@ -12,7 +12,8 @@ from util import error
 from util.extract_ast import ExtractAstPython, ExtractAstJava
 from util.write_mongo import MongoDb
 
-# set up logging, we log to everything to stdout except for errors which go to stderr
+# set up logging, we log everything to stdout except for errors which go to stderr
+# this is then picked up by serverSHARK
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 i = logging.StreamHandler(sys.stdout)

@@ -3,7 +3,7 @@ import tempfile
 
 from coastSHARK.util.extract_ast import ExtractAstPython, ExtractAstJava
 from coastSHARK.util.extract_ast import PYTHON_NODE_TYPES, JAVA_NODE_TYPES
-from coastSHARK.util.extract_ast import convert_2to3
+
 
 PYTHON_TEST_FILE_CONTENT = """
 import sys

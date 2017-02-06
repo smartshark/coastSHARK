@@ -1,9 +1,17 @@
+#!/usr/bin/env python
+
+"""This module contains the AST node types and the classes for extracting them from Java and Python.
+
+The most important classes here are ExtractAstPython and ExtractAstJava.
+"""
+
 import ast
 
 from lib2to3 import refactor, pgen2
 
 import javalang
 from . import error
+
 
 # for python
 # https://docs.python.org/3/library/ast.html
@@ -75,7 +83,7 @@ class NodePathVisitor(object):
 
 
 class NodePrintVisitor(NodePathVisitor):
-    """Prints tree incl. path."""
+    """Prints AST incl. depth."""
 
     def generic_visit(self, node, level):
         name = getattr(node, 'id', None)
@@ -124,8 +132,7 @@ class NodeTypeCountVisitor(ast.NodeVisitor):
 class ExtractAstJava(object):
     """Extracts the AST from .java Files.
 
-    In this case we do everything in this class with the help of
-    the javalang Library.
+    Uses the javalang Library.
     """
 
     def __init__(self, filename):
@@ -136,17 +143,16 @@ class ExtractAstJava(object):
         self.filename = filename
 
     def load(self):
+        """Read the AST."""
         try:
             with open(self.filename, 'r') as f:
                 self.astdata = javalang.parse.parse(f.read())
         except javalang.parser.JavaSyntaxError as e:
             err = 'Parser Error in file: {}'.format(self.filename)
-            # print(err)
             raise error.ParserException(err)
 
         except javalang.tokenizer.LexerError as le:
             err = 'Lexer Error in file: {}'.format(self.filename)
-            # print(err)
             raise error.ParserException(err)
 
         assert self.astdata is not None
@@ -170,13 +176,16 @@ class ExtractAstJava(object):
 
 
 class ExtractAstPython(object):
-    """"Extracts Python ASTs. Uses the build in ast and the visitor pattern."""
+    """Extracts the AST from .py Files.
+
+    Uses the build in ast and the visitor pattern."""
 
     def __init__(self, filename):
         self.astdata = None
         self.filename = filename
 
     def load(self):
+        """Read the AST."""
         try:
             with open(self.filename, 'r') as f:
                 self.astdata = ast.parse(source=convert_2to3(f.read(), self.filename), filename=self.filename)

@@ -1,6 +1,20 @@
-# check if tests succeed 
+sudo: required
 language: python
 python:
-  - "3.6"
-install: "python setup.py install"
-script: "python setup.py test"
+  - "3.5"
+
+services:
+  - docker
+
+before_install:
+  - printenv | grep -E '^TRAVIS_' > .env
+  - docker build -t sharkdocker .
+
+install:
+  - docker run sharkdocker /bin/sh -c "cd /root/coastshark; python3.5 setup.py install"
+
+script:
+  - docker run sharkdocker /bin/sh -c "cd /root/coastshark; python3.5 setup.py test"
+
+#after_success:
+#  - docker run --env-file .env sharkdocker /bin/sh -c "cd /root/coasthark; make deploy > /dev/null"

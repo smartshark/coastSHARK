@@ -1,4 +1,5 @@
 # coastSHARK
+
 [![Build Status](https://travis-ci.org/smartshark/coastSHARK.svg?branch=master)](https://travis-ci.org/smartshark/coastSHARK)
 
 Collect AST Information for smartSHARK.
@@ -12,6 +13,7 @@ For Python the build in [ast](https://docs.python.org/3/library/ast.html) packag
 ```bash
 pip install https://github.com/smartshark/coastSHARK/zipball/master --process-dependency-links
 ```
+The --process-dependency-links switch is needed because we install pycoSHARK as a requirement directly from git.
 
 ### via setup.py
 ```bash
@@ -21,22 +23,6 @@ python setup.py install
 ## Run Tests
 ```bash
 python setup.py test
-```
-
-## Build smartSHARK Plugin .tar
-```bash
-cd ./plugin_packaging/
-
-# creates the coastSHARK_plugin.tar
-./build_plugin.sh
-```
-
-## Rebuild schema.json
-```bash
-cd ./plugin_packaging/
-
-# recreates schema.json from MongoDB models
-python build_schema.py
 ```
 
 ## Execution
