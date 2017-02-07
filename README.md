@@ -1,6 +1,7 @@
 # coastSHARK
 
 [![Build Status](https://travis-ci.org/smartshark/coastSHARK.svg?branch=master)](https://travis-ci.org/smartshark/coastSHARK)
+[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)(https://smartshark.github.io/coastSHARK/)]
 
 Collect AST Information for smartSHARK.
 
