@@ -6,7 +6,8 @@ Currently Java and Python are supported.
 For Python the build in `ast <https://docs.python.org/3/library/ast.html>`_ package is used, for java the `javalang <https://github.com/c2nes/javalang>`_ package is used.
 
 This software is supposed to be run as a plugin for serverSHARK. It can be run standalone if a MongoDB is running and vcsSHARK has run beforehand.
-
+*coastSHARK* uses the `pycoSHARK <https://smartshark.github.io/pycoSHARK>`_ models :class:`pycoshark:pycoshark.mongomodels.VCSSystem`, :class:`pycoshark:pycoshark.mongomodels.File`, :class:`pycoshark:pycoshark.mongomodels.Commit` and :class:`pycoshark:pycoshark.mongomodels.CodeEntityState`
+The first are only used for looking up the correct CodeEntityState and the results are written to CodeEntityState.
 
 .. WARNING:: This software is still in development. Also note some caveats described in :ref:`pyast` and in :ref:`javaast`
 
