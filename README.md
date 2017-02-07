@@ -1,7 +1,7 @@
 # coastSHARK
 
 [![Build Status](https://travis-ci.org/smartshark/coastSHARK.svg?branch=master)](https://travis-ci.org/smartshark/coastSHARK)
-[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://smartshark.github.io/coastSHARK/)
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://smartshark.github.io/coastSHARK/)
 
 Collect AST Information for smartSHARK.
 
@@ -28,10 +28,13 @@ python setup.py test
 
 ## Execution
 
-To run coastSHARK needs an already checked out repository. It also depends on a running MongoDB and that the MongoDB is filled for this project by vcsSHARK.
+CoastSHARK needs an already checked out repository. It also depends on a running MongoDB and that the MongoDB is filled for this project by vcsSHARK.
 ```bash
+# after vcsSHARK has run we execute coastSHARK on an already checked out revision $REVISION in a folder $PATH_TO_REPOSITORY
 python smartshark_plugin.py -U $DBUSER -P $DBPASS -DB $DBNAME -i $PATH_TO_REPOSITORY -r $REVISION_HASH -u $REPOSITORY_GIT_URI -a $AUTHENTICATION_DB
 ```
+
+Basically follow the vcsSHARK tutorial and at the end install coastSHARK, checkout the revision to run against in the folder and then execute the above. Parameter for the MongoDB should be the same as with vcsSHARK.
 
 ## Python AST extraction
 

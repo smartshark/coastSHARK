@@ -50,6 +50,8 @@ To run coastSHARK needs an already checked out repository. It also depends on a 
     
     python smartshark_plugin.py -U $DBUSER -P $DBPASS -DB $DBNAME -i $PATH_TO_REPOSITORY -r $REVISION_HASH -u $REPOSITORY_GIT_URI -a $AUTHENTICATION_DB
 
+Basically follow the `vcsSHARK tutorial <https://smartshark.github.io/vcsSHARK/intro.html#tutorial>`_ and at the end install coastSHARK, checkout the revision to run against in the folder and then execute the above. Parameter for the MongoDB should be the same as with vcsSHARK.
+
 
 .. _pyast:
 
