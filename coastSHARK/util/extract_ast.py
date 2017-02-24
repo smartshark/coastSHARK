@@ -41,8 +41,8 @@ JAVA_NODE_TYPES = [
     'TryResource', 'CatchClause', 'CatchClauseParameter',
     'SwitchStatementCase', 'ForControl', 'EnhancedForControl',
     'Expression', 'Assignment', 'TernaryExpression', 'BinaryOperation', 'Cast', 'MethodReference', 'LambdaExpression',
-    'Primary', 'Literal', 'This', 'MemberReference', 'Invocation', 'ExplicitConstructorInvocation', 'SuperConstructorInvocation', 'MethodInvocation', 'SuperMethodInvocation', 'ArraySelector', 'ClassReference', 'VoidClassReference', 'VariableDeclarator', 'ClassCreator', 'ArrayCreator', 'InnerClassCreator',
-    'EnumBody', 'EnumConstantDeclaration', 'AnnotationMethod'
+    'Primary', 'Literal', 'This', 'MemberReference', 'Invocation', 'ExplicitConstructorInvocation', 'SuperConstructorInvocation', 'MethodInvocation', 'SuperMethodInvocation', 'SuperMemberReference', 'ArraySelector', 'ClassReference', 'VoidClassReference', 'VariableDeclarator', 'ClassCreator', 'ArrayCreator', 'InnerClassCreator',
+    'EnumBody', 'EnumConstantDeclaration', 'AnnotationMethod',
 ]
 
 
