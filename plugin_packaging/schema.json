@@ -18,7 +18,7 @@
                     "field_name": "metrics",
                     "fields": [
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Num",
                             "logical_type": [
                                 "ProductMetric",
@@ -28,7 +28,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Str",
                             "logical_type": [
                                 "ProductMetric",
@@ -38,7 +38,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Bytes",
                             "logical_type": [
                                 "ProductMetric",
@@ -48,7 +48,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "List",
                             "logical_type": [
                                 "ProductMetric",
@@ -58,7 +58,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Tuple",
                             "logical_type": [
                                 "ProductMetric",
@@ -68,7 +68,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Set",
                             "logical_type": [
                                 "ProductMetric",
@@ -78,7 +78,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Dict",
                             "logical_type": [
                                 "ProductMetric",
@@ -88,7 +88,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Ellipsis",
                             "logical_type": [
                                 "ProductMetric",
@@ -98,7 +98,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "NameConstant",
                             "logical_type": [
                                 "ProductMetric",
@@ -108,7 +108,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Name",
                             "logical_type": [
                                 "ProductMetric",
@@ -118,7 +118,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Load",
                             "logical_type": [
                                 "ProductMetric",
@@ -128,7 +128,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Store",
                             "logical_type": [
                                 "ProductMetric",
@@ -138,7 +138,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Del",
                             "logical_type": [
                                 "ProductMetric",
@@ -148,7 +148,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Starred",
                             "logical_type": [
                                 "ProductMetric",
@@ -158,7 +158,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Expr",
                             "logical_type": [
                                 "ProductMetric",
@@ -168,7 +168,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "UnaryOp",
                             "logical_type": [
                                 "ProductMetric",
@@ -178,7 +178,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "UAdd",
                             "logical_type": [
                                 "ProductMetric",
@@ -188,7 +188,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "USub",
                             "logical_type": [
                                 "ProductMetric",
@@ -198,7 +198,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Not",
                             "logical_type": [
                                 "ProductMetric",
@@ -208,7 +208,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Invert",
                             "logical_type": [
                                 "ProductMetric",
@@ -218,7 +218,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "BinOp",
                             "logical_type": [
                                 "ProductMetric",
@@ -228,7 +228,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Add",
                             "logical_type": [
                                 "ProductMetric",
@@ -238,7 +238,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Sub",
                             "logical_type": [
                                 "ProductMetric",
@@ -248,7 +248,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Mult",
                             "logical_type": [
                                 "ProductMetric",
@@ -258,7 +258,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Div",
                             "logical_type": [
                                 "ProductMetric",
@@ -268,7 +268,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "FloorDiv",
                             "logical_type": [
                                 "ProductMetric",
@@ -278,7 +278,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Mod",
                             "logical_type": [
                                 "ProductMetric",
@@ -288,7 +288,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Pow",
                             "logical_type": [
                                 "ProductMetric",
@@ -298,7 +298,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "LShift",
                             "logical_type": [
                                 "ProductMetric",
@@ -308,7 +308,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "RShift",
                             "logical_type": [
                                 "ProductMetric",
@@ -318,7 +318,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "BitOr",
                             "logical_type": [
                                 "ProductMetric",
@@ -328,7 +328,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "BitXor",
                             "logical_type": [
                                 "ProductMetric",
@@ -338,7 +338,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "BitAnd",
                             "logical_type": [
                                 "ProductMetric",
@@ -348,7 +348,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "MatMult",
                             "logical_type": [
                                 "ProductMetric",
@@ -358,7 +358,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "BoolOp",
                             "logical_type": [
                                 "ProductMetric",
@@ -368,7 +368,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "And",
                             "logical_type": [
                                 "ProductMetric",
@@ -378,7 +378,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Or",
                             "logical_type": [
                                 "ProductMetric",
@@ -388,7 +388,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Compare",
                             "logical_type": [
                                 "ProductMetric",
@@ -398,7 +398,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Eq",
                             "logical_type": [
                                 "ProductMetric",
@@ -408,7 +408,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "NotEq",
                             "logical_type": [
                                 "ProductMetric",
@@ -418,7 +418,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Lt",
                             "logical_type": [
                                 "ProductMetric",
@@ -428,7 +428,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "LtE",
                             "logical_type": [
                                 "ProductMetric",
@@ -438,7 +438,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Gt",
                             "logical_type": [
                                 "ProductMetric",
@@ -448,7 +448,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "GtE",
                             "logical_type": [
                                 "ProductMetric",
@@ -458,7 +458,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Is",
                             "logical_type": [
                                 "ProductMetric",
@@ -468,7 +468,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "IsNot",
                             "logical_type": [
                                 "ProductMetric",
@@ -478,7 +478,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "In",
                             "logical_type": [
                                 "ProductMetric",
@@ -488,7 +488,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "NotIn",
                             "logical_type": [
                                 "ProductMetric",
@@ -498,7 +498,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Call",
                             "logical_type": [
                                 "ProductMetric",
@@ -508,7 +508,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "keyword",
                             "logical_type": [
                                 "ProductMetric",
@@ -518,7 +518,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "IfExp",
                             "logical_type": [
                                 "ProductMetric",
@@ -528,7 +528,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Attribute",
                             "logical_type": [
                                 "ProductMetric",
@@ -538,7 +538,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Subscript",
                             "logical_type": [
                                 "ProductMetric",
@@ -548,7 +548,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Index",
                             "logical_type": [
                                 "ProductMetric",
@@ -558,7 +558,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Slice",
                             "logical_type": [
                                 "ProductMetric",
@@ -568,7 +568,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "ExtSlice",
                             "logical_type": [
                                 "ProductMetric",
@@ -578,7 +578,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "ListComp",
                             "logical_type": [
                                 "ProductMetric",
@@ -588,7 +588,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "SetComp",
                             "logical_type": [
                                 "ProductMetric",
@@ -598,7 +598,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "GeneratorExp",
                             "logical_type": [
                                 "ProductMetric",
@@ -608,7 +608,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "DictComp",
                             "logical_type": [
                                 "ProductMetric",
@@ -618,7 +618,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "comprehension",
                             "logical_type": [
                                 "ProductMetric",
@@ -628,7 +628,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Assign",
                             "logical_type": [
                                 "ProductMetric",
@@ -638,7 +638,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "AugAssign",
                             "logical_type": [
                                 "ProductMetric",
@@ -648,7 +648,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Print",
                             "logical_type": [
                                 "ProductMetric",
@@ -658,7 +658,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Raise",
                             "logical_type": [
                                 "ProductMetric",
@@ -668,7 +668,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Assert",
                             "logical_type": [
                                 "ProductMetric",
@@ -678,7 +678,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Delete",
                             "logical_type": [
                                 "ProductMetric",
@@ -688,7 +688,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Pass",
                             "logical_type": [
                                 "ProductMetric",
@@ -698,7 +698,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java and Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java and Python Node Type in the AST of the file.",
                             "field_name": "Import",
                             "logical_type": [
                                 "ProductMetric",
@@ -709,7 +709,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "ImportFrom",
                             "logical_type": [
                                 "ProductMetric",
@@ -719,7 +719,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "alias",
                             "logical_type": [
                                 "ProductMetric",
@@ -729,7 +729,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Module",
                             "logical_type": [
                                 "ProductMetric",
@@ -739,7 +739,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "If",
                             "logical_type": [
                                 "ProductMetric",
@@ -749,7 +749,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "For",
                             "logical_type": [
                                 "ProductMetric",
@@ -759,7 +759,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "While",
                             "logical_type": [
                                 "ProductMetric",
@@ -769,7 +769,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Break",
                             "logical_type": [
                                 "ProductMetric",
@@ -779,7 +779,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Continue",
                             "logical_type": [
                                 "ProductMetric",
@@ -789,7 +789,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Try",
                             "logical_type": [
                                 "ProductMetric",
@@ -799,7 +799,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "TryFinally",
                             "logical_type": [
                                 "ProductMetric",
@@ -809,7 +809,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "TryExcept",
                             "logical_type": [
                                 "ProductMetric",
@@ -819,7 +819,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "ExceptHandler",
                             "logical_type": [
                                 "ProductMetric",
@@ -829,7 +829,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "With",
                             "logical_type": [
                                 "ProductMetric",
@@ -839,7 +839,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "withitem",
                             "logical_type": [
                                 "ProductMetric",
@@ -849,7 +849,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "FunctionDef",
                             "logical_type": [
                                 "ProductMetric",
@@ -859,7 +859,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Lambda",
                             "logical_type": [
                                 "ProductMetric",
@@ -869,7 +869,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "arguments",
                             "logical_type": [
                                 "ProductMetric",
@@ -879,7 +879,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "arg",
                             "logical_type": [
                                 "ProductMetric",
@@ -889,7 +889,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Return",
                             "logical_type": [
                                 "ProductMetric",
@@ -899,7 +899,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Yield",
                             "logical_type": [
                                 "ProductMetric",
@@ -909,7 +909,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "YieldFrom",
                             "logical_type": [
                                 "ProductMetric",
@@ -919,7 +919,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Global",
                             "logical_type": [
                                 "ProductMetric",
@@ -929,7 +929,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Nonlocal",
                             "logical_type": [
                                 "ProductMetric",
@@ -939,7 +939,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "ClassDef",
                             "logical_type": [
                                 "ProductMetric",
@@ -949,7 +949,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "AsyncFunctionDef",
                             "logical_type": [
                                 "ProductMetric",
@@ -959,7 +959,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "Await",
                             "logical_type": [
                                 "ProductMetric",
@@ -969,7 +969,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "AsyncFor",
                             "logical_type": [
                                 "ProductMetric",
@@ -979,7 +979,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Python Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Python Node Type in the AST of the file, for information on the node types see: http://greentreesnakes.readthedocs.io/en/latest/nodes.html",
                             "field_name": "AsyncWith",
                             "logical_type": [
                                 "ProductMetric",
@@ -989,7 +989,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "CompilationUnit",
                             "logical_type": [
                                 "ProductMetric",
@@ -999,7 +999,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Documented",
                             "logical_type": [
                                 "ProductMetric",
@@ -1009,7 +1009,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Declaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1019,7 +1019,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "TypeDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1029,7 +1029,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "PackageDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1039,7 +1039,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ClassDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1049,7 +1049,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "EnumDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1059,7 +1059,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "InterfaceDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1069,7 +1069,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "AnnotationDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1079,7 +1079,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Type",
                             "logical_type": [
                                 "ProductMetric",
@@ -1089,7 +1089,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "BasicType",
                             "logical_type": [
                                 "ProductMetric",
@@ -1099,7 +1099,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ReferenceType",
                             "logical_type": [
                                 "ProductMetric",
@@ -1109,7 +1109,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "TypeArgument",
                             "logical_type": [
                                 "ProductMetric",
@@ -1119,7 +1119,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "TypeParameter",
                             "logical_type": [
                                 "ProductMetric",
@@ -1129,7 +1129,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Annotation",
                             "logical_type": [
                                 "ProductMetric",
@@ -1139,7 +1139,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ElementValuePair",
                             "logical_type": [
                                 "ProductMetric",
@@ -1149,7 +1149,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ElementArrayValue",
                             "logical_type": [
                                 "ProductMetric",
@@ -1159,7 +1159,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Member",
                             "logical_type": [
                                 "ProductMetric",
@@ -1169,7 +1169,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "MethodDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1179,7 +1179,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "FieldDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1189,7 +1189,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ConstructorDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1199,7 +1199,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ConstantDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1209,7 +1209,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ArrayInitializer",
                             "logical_type": [
                                 "ProductMetric",
@@ -1219,7 +1219,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "VariableDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1229,7 +1229,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "LocalVariableDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1239,7 +1239,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "FormalParameter",
                             "logical_type": [
                                 "ProductMetric",
@@ -1249,7 +1249,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "InferredFormalParameter",
                             "logical_type": [
                                 "ProductMetric",
@@ -1259,7 +1259,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Statement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1269,7 +1269,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "IfStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1279,7 +1279,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "WhileStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1289,7 +1289,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "DoStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1299,7 +1299,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ForStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1309,7 +1309,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "AssertStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1319,7 +1319,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "BreakStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1329,7 +1329,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ContinueStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1339,7 +1339,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ReturnStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1349,7 +1349,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ThrowStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1359,7 +1359,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "SynchronizedStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1369,7 +1369,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "TryStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1379,7 +1379,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "SwitchStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1389,7 +1389,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "BlockStatement",
                             "logical_type": [
                                 "ProductMetric",
@@ -1399,7 +1399,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "StatementExpression",
                             "logical_type": [
                                 "ProductMetric",
@@ -1409,7 +1409,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "TryResource",
                             "logical_type": [
                                 "ProductMetric",
@@ -1419,7 +1419,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "CatchClause",
                             "logical_type": [
                                 "ProductMetric",
@@ -1429,7 +1429,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "CatchClauseParameter",
                             "logical_type": [
                                 "ProductMetric",
@@ -1439,7 +1439,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "SwitchStatementCase",
                             "logical_type": [
                                 "ProductMetric",
@@ -1449,7 +1449,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ForControl",
                             "logical_type": [
                                 "ProductMetric",
@@ -1459,7 +1459,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "EnhancedForControl",
                             "logical_type": [
                                 "ProductMetric",
@@ -1469,7 +1469,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Expression",
                             "logical_type": [
                                 "ProductMetric",
@@ -1479,7 +1479,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Assignment",
                             "logical_type": [
                                 "ProductMetric",
@@ -1489,7 +1489,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "TernaryExpression",
                             "logical_type": [
                                 "ProductMetric",
@@ -1499,7 +1499,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "BinaryOperation",
                             "logical_type": [
                                 "ProductMetric",
@@ -1509,7 +1509,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Cast",
                             "logical_type": [
                                 "ProductMetric",
@@ -1519,7 +1519,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "MethodReference",
                             "logical_type": [
                                 "ProductMetric",
@@ -1529,7 +1529,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "LambdaExpression",
                             "logical_type": [
                                 "ProductMetric",
@@ -1539,7 +1539,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Primary",
                             "logical_type": [
                                 "ProductMetric",
@@ -1549,7 +1549,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Literal",
                             "logical_type": [
                                 "ProductMetric",
@@ -1559,7 +1559,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "This",
                             "logical_type": [
                                 "ProductMetric",
@@ -1569,7 +1569,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "MemberReference",
                             "logical_type": [
                                 "ProductMetric",
@@ -1579,7 +1579,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "Invocation",
                             "logical_type": [
                                 "ProductMetric",
@@ -1589,7 +1589,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ExplicitConstructorInvocation",
                             "logical_type": [
                                 "ProductMetric",
@@ -1599,7 +1599,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "SuperConstructorInvocation",
                             "logical_type": [
                                 "ProductMetric",
@@ -1609,7 +1609,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "MethodInvocation",
                             "logical_type": [
                                 "ProductMetric",
@@ -1619,7 +1619,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "SuperMethodInvocation",
                             "logical_type": [
                                 "ProductMetric",
@@ -1629,7 +1629,17 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
+                            "field_name": "SuperMemberReference",
+                            "logical_type": [
+                                "ProductMetric",
+                                "ASTNodeType",
+                                "Java"
+                            ],
+                            "type": "IntegerType"
+                        },
+                        {
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ArraySelector",
                             "logical_type": [
                                 "ProductMetric",
@@ -1639,7 +1649,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ClassReference",
                             "logical_type": [
                                 "ProductMetric",
@@ -1649,7 +1659,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "VoidClassReference",
                             "logical_type": [
                                 "ProductMetric",
@@ -1659,7 +1669,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "VariableDeclarator",
                             "logical_type": [
                                 "ProductMetric",
@@ -1669,7 +1679,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ClassCreator",
                             "logical_type": [
                                 "ProductMetric",
@@ -1679,7 +1689,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "ArrayCreator",
                             "logical_type": [
                                 "ProductMetric",
@@ -1689,7 +1699,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "InnerClassCreator",
                             "logical_type": [
                                 "ProductMetric",
@@ -1699,7 +1709,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "EnumBody",
                             "logical_type": [
                                 "ProductMetric",
@@ -1709,7 +1719,7 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "EnumConstantDeclaration",
                             "logical_type": [
                                 "ProductMetric",
@@ -1719,12 +1729,23 @@
                             "type": "IntegerType"
                         },
                         {
-                            "desc": "Occurences of this Java Node Type in the AST of the file.",
+                            "desc": "Occurrences of this Java Node Type in the AST of the file, for information on the node types see: https://github.com/c2nes/javalang/blob/master/javalang/tree.py",
                             "field_name": "AnnotationMethod",
                             "logical_type": [
                                 "ProductMetric",
                                 "ASTNodeType",
                                 "Java"
+                            ],
+                            "type": "IntegerType"
+                        },
+                        {
+                            "desc": "Number of AST Nodes in the file.",
+                            "field_name": "node_count",
+                            "logical_type": [
+                                "ProductMetric",
+                                "ASTNodeType",
+                                "Java",
+                                "Python"
                             ],
                             "type": "IntegerType"
                         }
