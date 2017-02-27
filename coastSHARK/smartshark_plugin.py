@@ -73,7 +73,7 @@ def main(args):
                     m.write_node_type_counts(mongo_filepath, e.node_count, e.type_counts)
             # this is not critical, we can still do the other files
             except error.ParserException as e:
-                log.error(str(e))
+                log.info(str(e))
                 pass
             # this is critical
             except Exception as e:
