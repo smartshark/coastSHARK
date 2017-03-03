@@ -12,7 +12,13 @@
             "version": "0.10"
         }
     ],
-    "created_collections": [],
+    "created_collections": [
+        {
+			"name": "code_entity_state",
+			"shard_key": [{"s_key": 1}],
+            "unique": true
+		}
+    ],
     "arguments": [
         {
             "name": "plugin_path",
@@ -51,14 +57,14 @@
         },
         {
             "name": "db_user",
-            "required": true,
+            "required": false,
             "position": 5,
             "type": "execute",
             "description": "database user for the mongodb"
         },
         {
             "name": "db_password",
-            "required": true,
+            "required": false,
             "position": 6,
             "type": "execute",
             "description": "password for the user of the mongodb"
@@ -86,10 +92,17 @@
         },
         {
             "name": "db_authentication",
-            "required": true,
+            "required": false,
             "position": 10,
             "type": "execute",
             "description": "databse against which users are authenticated"
+        },
+        {
+            "name": "ssl_enabled",
+            "required": false,
+            "position": 11,
+            "type": "execute",
+            "description": "needs to be set if database uses ssl connection"
         }
     ]
 }

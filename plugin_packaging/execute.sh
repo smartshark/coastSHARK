@@ -24,6 +24,10 @@ if [ ! -z ${10+x} ] && [ ${10} != "None" ]; then
 	COMMAND="$COMMAND --db-authentication ${10}"
 fi
 
+if [ ! -z ${11+x} ] && [ ${11} != "None" ]; then
+	COMMAND="$COMMAND --ssl"
+fi
+
 $COMMAND
 
 

@@ -1751,9 +1751,11 @@
                         }
                     ],
                     "logical_type": "Nested",
-                    "type": "StructType"
+                    "type": "StructType",
+                    "desc": "Metrics of the code entity."
                 }
-            ]
+            ],
+            "desc": "Collection that contains for each commit of the project all code entity states (e.g., all methods of the project at each commit)"
         }
     ],
     "plugin": "coastSHARK_1.00"

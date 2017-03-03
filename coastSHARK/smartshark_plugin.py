@@ -11,6 +11,7 @@ import timeit
 from util import error
 from util.extract_ast import ExtractAstPython, ExtractAstJava
 from util.write_mongo import MongoDb
+from pycoshark.utils import get_base_argparser
 
 # set up logging, we log everything to stdout except for errors which go to stderr
 # this is then picked up by serverSHARK
@@ -41,7 +42,7 @@ def main(args):
     start = timeit.default_timer()
 
     # check mongodb connectivity
-    m = MongoDb(args.db_hostname, args.db_port, args.db_database, args.db_user, args.db_password, args.db_authentication, args.url, args.rev)
+    m = MongoDb(args.db_database, args.db_user, args.db_password, args.db_hostname, args.db_port, args.db_authentication, args.ssl, args.url, args.rev)
     m.connect()
 
     log.info("Starting AST extraction")
@@ -86,15 +87,9 @@ def main(args):
 
 if __name__ == '__main__':
     # we basically re-use the vcsSHARK argparse config here
-    parser = argparse.ArgumentParser(description='Analyze the given URI. An URI should be a checked out GIT Repository.')
-    parser.add_argument('-U', '--db-user', help='Database user name', default=None)
-    parser.add_argument('-P', '--db-password', help='Database user password', default=None)
-    parser.add_argument('-DB', '--db-database', help='Database name', default='vcsshark')
-    parser.add_argument('-H', '--db-hostname', help='Name of the host, where the database server is running', default='localhost')
-    parser.add_argument('-p', '--db-port', help='Port, where the database server is listening', default=27017, type=int)
+    parser = get_base_argparser('Analyze the given URI. An URI should be a checked out GIT Repository.', '1.0.0')
     parser.add_argument('-i', '--input', help='Path to the checked out repository directory', required=True)
     parser.add_argument('-r', '--rev', help='Hash of the revision.', required=True)
     parser.add_argument('-u', '--url', help='URL of the project (e.g., GIT Url).', required=True)
-    parser.add_argument('-a', '--db-authentication', help='Name of the authentication database')
 
     main(parser.parse_args())
