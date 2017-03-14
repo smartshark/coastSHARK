@@ -145,7 +145,7 @@ class ExtractAstJava(object):
     def load(self):
         """Read the AST."""
         try:
-            with open(self.filename, 'r') as f:
+            with open(self.filename, 'r', encoding='latin-1') as f:  # latin-1 because we assume no crazy umlaut function names
                 self.astdata = javalang.parse.parse(f.read())
         except javalang.parser.JavaSyntaxError as e:
             err = 'Parser Error in file: {}'.format(self.filename)
@@ -187,7 +187,7 @@ class ExtractAstPython(object):
     def load(self):
         """Read the AST."""
         try:
-            with open(self.filename, 'r') as f:
+            with open(self.filename, 'r', encoding='latin-1') as f:
                 self.astdata = ast.parse(source=convert_2to3(f.read(), self.filename), filename=self.filename)
 
             assert self.astdata is not None
