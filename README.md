@@ -26,7 +26,7 @@ python setup.py install
 python setup.py test
 ```
 
-## Execution
+## Execution for smartSHARK
 
 CoastSHARK needs an already checked out repository. It also depends on a running MongoDB and that the MongoDB is filled for this project by vcsSHARK.
 ```bash
@@ -45,3 +45,11 @@ A future version of the coastSHARK may mitigate this problem by probing for the 
 ## Java AST extraction
 
 The node types are defined by the javalang package. Other packages for parsing java code and extracting the AST may have different names for the node types.
+
+## Execution Standalone
+CoastSHARK can run standalone and write its data to a CSV file for debugging purposes.
+```bash
+python coastshark.py -i /path/to/folder
+```
+
+This creates an ast.csv file in the current folder.
