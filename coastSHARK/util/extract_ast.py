@@ -185,10 +185,13 @@ class ExtractAstPython(object):
         self.filename = filename
 
     def load(self):
-        """Read the AST."""
+        """Read the AST.
+
+        We add a \n at the end because 2to3 dies otherwise.
+        """
         try:
             with open(self.filename, 'r', encoding='latin-1') as f:
-                self.astdata = ast.parse(source=convert_2to3(f.read(), self.filename), filename=self.filename)
+                self.astdata = ast.parse(source=convert_2to3(f.read() + '\n', self.filename), filename=self.filename)
 
             assert self.astdata is not None
 

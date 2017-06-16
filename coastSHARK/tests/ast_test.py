@@ -21,8 +21,7 @@ import sys
 import urlparse
 
 url = urlparse.urlparse('http://www.uni-goettingen.de')
-print "narf: %s" % ("narf2",)
-"""
+print "narf: %s" % ("narf2",)"""
 
 JAVA_TEST_FILE_CONTENT = """
 import javax.awt.*;

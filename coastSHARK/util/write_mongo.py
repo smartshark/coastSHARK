@@ -5,7 +5,6 @@ from pycoshark.mongomodels import VCSSystem, File, Commit, CodeEntityState
 from pycoshark.utils import get_code_entity_state_identifier, create_mongodb_uri_string
 
 
-
 class MongoDb(object):
     """This class just wraps the Mongo connection code and the query for fetching the correct CodeEntityState for inserting the AST information.
     """
@@ -15,7 +14,6 @@ class MongoDb(object):
         self.revision = revision
         self.database = database
         self.uri = create_mongodb_uri_string(user, password, host, port, authentication, ssl)
-        
 
     def connect(self):
         connect(self.database, host=self.uri)
