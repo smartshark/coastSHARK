@@ -37,6 +37,8 @@ def main(args):
         raise Exception('--input {} is not valid'.format(args.input))
     if not os.access(args.input, os.R_OK):
         raise Exception('--input {} is not readable'.format(args.input))
+    if not args.input.endswith('/'):
+        raise Exception('--input needs trailing slash')
 
     # timing
     start = timeit.default_timer()
