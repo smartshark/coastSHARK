@@ -15,7 +15,7 @@ from pycoshark.utils import get_base_argparser
 
 # set up logging, we log everything to stdout except for errors which go to stderr
 # this is then picked up by serverSHARK
-log = logging.getLogger()
+log = logging.getLogger('coastSHARK')
 log.setLevel(logging.INFO)
 i = logging.StreamHandler(sys.stdout)
 e = logging.StreamHandler(sys.stderr)
