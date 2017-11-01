@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-from mongoengine import *
+from mongoengine import connect
 from pycoshark.mongomodels import VCSSystem, File, Commit, CodeEntityState
 from pycoshark.utils import get_code_entity_state_identifier, create_mongodb_uri_string
 
 
 class MongoDb(object):
-    """This class just wraps the Mongo connection code and the query for fetching the correct CodeEntityState for inserting the AST information.
-    """
+    """This class just wraps the Mongo connection code and the query for fetching the correct CodeEntityState for inserting the AST information."""
 
     def __init__(self, database, user, password, host, port, authentication, ssl, vcs_url, revision):
         self.vcs_url = vcs_url
@@ -30,7 +29,7 @@ class MongoDb(object):
 
         s_key = get_code_entity_state_identifier(filepath, c.id, f.id)
 
-        CodeEntityState.objects(s_key=s_key).upsert_one(imports=imports)
+        CodeEntityState.objects(s_key=s_key).upsert_one(imports=imports, ce_type='file', long_name=filepath, commit_id=c.id, file_id=f.id)
 
     def write_node_type_counts(self, filepath, node_count, node_type_counts):
         """Write AST bag-of-words and number of AST nodes for this file to code_entity_states.
@@ -45,6 +44,10 @@ class MongoDb(object):
 
         tmp = {'set__metrics__{}'.format(k): v for k, v in node_type_counts.items()}
         tmp['set__metrics__node_count'] = node_count
+        tmp['ce_type'] = 'file'
+        tmp['long_name'] = filepath
+        tmp['commit_id'] = c.id
+        tmp['file_id'] = f.id
 
         s_key = get_code_entity_state_identifier(filepath, c.id, f.id)
 
