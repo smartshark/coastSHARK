@@ -78,6 +78,10 @@ def main(args):
             except error.ParserException as e:
                 log.info(str(e))
                 pass
+            # this is not critical, we can still do the other files
+            except TabError as e:
+                log.info(str(e))
+                pass
             # this is critical
             except Exception as e:
                 log.exception(e)
