@@ -11,7 +11,7 @@ from lib2to3 import refactor, pgen2
 
 import javalang
 from . import error
-
+from .complexity_java import ComplexityJava
 
 # for python
 # https://docs.python.org/3/library/ast.html
@@ -152,10 +152,14 @@ class ExtractAstJava(object):
             raise error.ParserException(err)
 
         except javalang.tokenizer.LexerError as le:
-            err = 'Lexer Error in file: {}'.format(self.filename)
+            err = 'Lexer Error in file: {}\n{}'.format(self.filename, le)
             raise error.ParserException(err)
 
         assert self.astdata is not None
+
+        # new complexity metrics
+        cj = ComplexityJava(self.astdata)
+        self.method_metrics = list(cj.cognitive_complexity())  # we list() here because cognitive_complexity is a generator
 
         for path, node in self.astdata:
             type_name = type(node).__name__

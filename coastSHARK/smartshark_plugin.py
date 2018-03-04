@@ -20,7 +20,7 @@ log.setLevel(logging.INFO)
 i = logging.StreamHandler(sys.stdout)
 e = logging.StreamHandler(sys.stderr)
 
-i.setLevel(logging.INFO)
+i.setLevel(logging.DEBUG)
 e.setLevel(logging.ERROR)
 
 log.addHandler(i)
@@ -28,6 +28,9 @@ log.addHandler(e)
 
 
 def main(args):
+    if args.log_level:
+        log.setLevel(args.log_level)
+
     # unused for now
     ignore_files = []
     ignore_dirs = []
@@ -74,6 +77,8 @@ def main(args):
                     e.load()
                     m.write_imports(mongo_filepath, e.imports)
                     m.write_node_type_counts(mongo_filepath, e.node_count, e.type_counts)
+                    m.write_method_metrics(mongo_filepath, e.method_metrics)
+
             # this is not critical, we can still do the other files
             except error.ParserException as e:
                 log.info(str(e))
@@ -97,5 +102,5 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--input', help='Path to the checked out repository directory', required=True)
     parser.add_argument('-r', '--rev', help='Hash of the revision.', required=True)
     parser.add_argument('-u', '--url', help='URL of the project (e.g., GIT Url).', required=True)
-
+    parser.add_argument('-ll', '--log_level', help='Log level for stdout (DEBUG, INFO), default INFO', default='INFO')
     main(parser.parse_args())

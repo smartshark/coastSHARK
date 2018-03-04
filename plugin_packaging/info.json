@@ -1,7 +1,7 @@
 {
     "name": "coastSHARK",
     "author": "Alexander Trautsch",
-    "version": "1.00",
+    "version": "1.01",
     "plugin_type": "rev",
     "description": "Collects AST Data.",
     "linux_libraries": [],
@@ -103,6 +103,13 @@
             "position": 11,
             "type": "execute",
             "description": "needs to be set if database uses ssl connection"
+        },
+        {
+            "name": "log_level",
+            "required": false,
+            "position": 12,
+            "type": "execute",
+            "description": "Log level for stdout (DEBUG, INFO), default INFO."
         }
     ]
 }
