@@ -31,6 +31,7 @@ SM_DT_INV = {v.lower(): k for k, v in SM_DT.items()}
 
 
 class SourcemeterConversion(object):
+    """This is a utility class for matching against Sourcemeter long_names."""
 
     def __init__(self):
         self._param = re.compile('\(([\w,;,/,\$,\[]*)\)([\w,;,,\./,\$,\[]+)')  # used to map sourcemeter params and return code
@@ -44,7 +45,7 @@ class SourcemeterConversion(object):
         return dt, count
 
     def get_sm_long_name2(self, long_name):
-        """Returns a collapsed Sourcemeter long_name"""
+        """Return a collapsed Sourcemeter long_name."""
         self._long_name = long_name
         m = re.search(self._param, long_name)
         if not m:
@@ -88,7 +89,7 @@ class SourcemeterConversion(object):
         return '{}({}){}'.format(start[0], ''.join(plist), ret)
 
     def get_sm_long_name(self, method):
-        """Returns a collapsed Sourcemeter long_name from our own method data."""
+        """Return a collapsed Sourcemeter long_name from our own method data."""
         ps = []
         for param in method['parameter_types']:
             pruned, bc = self._remove_bracket(param)
@@ -192,13 +193,17 @@ class ComplexityJava(object):
     """Extracts complexity measures from the AST."""
 
     def __init__(self, compilation_unit_ast):
-        """Extract complexity measures from the compilation units AST."""
+        """Extract complexity measures from the compilation units AST.
+
+        :param compilation_unit_ast: The AST of the compilation unit (.java file).
+        """
         self.ast = compilation_unit_ast
         self._log = logging.getLogger('coastSHARK')
 
         self._binop = re.compile('binop:"(!?\W+)"')  # used to match operators for sequence changes
 
     def _method_params(self, method):
+        """Extract method parameter and return types, we already do some Sourcmeter notations here, e.g., [ for array."""
         ret_type = 'Void'
         if hasattr(method, 'return_type') and method.return_type:
             r = method.return_type
@@ -238,7 +243,7 @@ class ComplexityJava(object):
     def _find_max_level(self):
         """Find maximal level for Counting anonymous Classes.
 
-        A normal ClassDelcaration counts as one level, a ClassCreator counts only if it has inline methods defined.
+        A normal ClassDeclaration counts as one level, a ClassCreator counts only if it has inline methods defined.
         """
         max_level = 0
         for path, method in self.ast:
@@ -370,6 +375,7 @@ class ComplexityJava(object):
             # gather metrics from the metric ast
             cogcs = self.cognitive_complexity_sonar(method)
             cc = self.cyclomatic_complexity(method)
+
             params, ret_type = self._method_params(method)
 
             # we may have interface methods with a body (default methods)
@@ -405,7 +411,7 @@ class ComplexityJava(object):
                 basepath = basepath[:-1]
                 continue
 
-        # use the position of the parent of the BinaryOperation, e.g., if, while as key
+        # 2. use the position of the parent of the BinaryOperation, e.g., if, while as key
         if not basepath[-1].position:
             raise Exception('no position for: {}'.format(basepath[-1]))
         return basepath[-1].position[0]

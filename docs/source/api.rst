@@ -12,6 +12,12 @@ util.extract_ast
 .. automodule:: util.extract_ast
     :members:
 
+util.complexity_java
+----------------
+
+.. automodule:: util.complexity_java
+    :members:
+
 util.write_mongo
 ----------------
 
