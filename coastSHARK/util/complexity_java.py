@@ -25,20 +25,106 @@ JAVA_BRANCH_TYPES_MCCC = [
 
 JAVA_SEQUENCE_TYPES = ['&&', '||']
 
-SM_DT = {'I': 'int', 'J': 'long', 'V': 'Void', 'Z': 'boolean', 'F': 'float', 'C': 'char', 'B': 'byte'}
+SM_DT = {'I': 'int', 'J': 'long', 'V': 'Void', 'Z': 'boolean', 'F': 'float', 'C': 'char', 'B': 'byte', 'D': 'double'}
+
+SM_DT_INV = {v.lower(): k for k, v in SM_DT.items()}
 
 
 class SourcemeterConversion(object):
 
     def __init__(self):
-        self._param = re.compile('\(([\w,;,/,\$,\[]*)\)([\w,;,/,\$,\[]+)')  # used to map sourcemeter params and return code
+        self._param = re.compile('\(([\w,;,/,\$,\[]*)\)([\w,;,,\./,\$,\[]+)')  # used to map sourcemeter params and return code
         self._log = logging.getLogger('coastSHARK')
+
+    def _remove_bracket(self, dt):
+        count = 0
+        while dt.startswith('['):
+            dt = dt[1:]
+            count += 1
+        return dt, count
+
+    def get_sm_long_name2(self, long_name):
+        """Returns a collapsed Sourcemeter long_name"""
+        self._long_name = long_name
+        m = re.search(self._param, long_name)
+        if not m:
+            raise Exception('no match found for {}'.format(long_name))
+
+        ret, bc = self._remove_bracket(m.group(2))
+
+        if ret.startswith('L'):
+            pruned = self._match_l(ret[1:-1])
+            if pruned.lower() in SM_DT_INV.keys():
+                ret = '[' * bc + SM_DT_INV[pruned.lower()]
+            else:
+                ret = '[' * bc + self._match_l('L{};'.format(pruned))
+
+        plist = []
+        rest_param = m.group(1)
+        while len(rest_param) > 0 and rest_param[0] != ';':
+            rest_param, bc = self._remove_bracket(rest_param)
+            if rest_param.startswith('L'):
+                tmp = rest_param.split(';')
+                # reattach the rest
+                if len(tmp) > 1:
+                    rest_param = ';'.join(tmp[1:]) + ';'  # need to append ; again
+                else:
+                    rest_param = ''
+                # drop L, ; is already dropped
+                pruned = self._match_l(tmp[0][1:])
+                if pruned.lower() in SM_DT_INV.keys():
+                    r = SM_DT_INV[pruned.lower()]
+                    plist.append('[' * bc + r)
+                else:
+                    if pruned:
+                        plist.append('[' * bc + 'L{};'.format(pruned))
+                    else:
+                        plist.append('L')
+            else:
+                plist.append('[' * bc + rest_param[0])
+                rest_param = rest_param[1:]
+
+        start = long_name.split('(')
+        return '{}({}){}'.format(start[0], ''.join(plist), ret)
+
+    def get_sm_long_name(self, method):
+        """Returns a collapsed Sourcemeter long_name from our own method data."""
+        ps = []
+        for param in method['parameter_types']:
+            pruned, bc = self._remove_bracket(param)
+
+            if pruned.lower() in SM_DT_INV.keys():
+                ps.append('[' * bc + SM_DT_INV[pruned.lower()])
+            else:
+                ps.append('[' * bc + 'L{};'.format(pruned))
+
+        if method['return_type'] == 'Void':
+            ret = 'V'
+        else:
+            pruned, bc = self._remove_bracket(method['return_type'])
+            if pruned.lower() in SM_DT_INV:
+                ret = '[' * bc + SM_DT_INV[pruned.lower()]
+            else:
+                ret = '[' * bc + 'L{};'.format(pruned)
+
+        params1 = ''.join(ps)
+        params2 = ''
+        for p in ps:
+            if p.lower() == 'j':
+                params2 += 'L'
+            else:
+                params2 += p
+
+        var1 = '{}.{}.{}({}){}'.format(method['package_name'], method['class_name'], method['method_name'], params1, ret)
+        var2 = '{}.{}.{}({}){}'.format(method['package_name'], method['class_name'], method['method_name'], params2, ret)
+        return var1, var2
 
     def get_sm_params(self, long_name):
         """Take a Sourcemeter long_name for a method and return a Mapping to our method parameter types and return types.
 
         This is used to match overloaded functions.
         """
+        self._long_name = long_name
         m = re.search(self._param, long_name)
         if not m:
             raise Exception('no match found for {}'.format(long_name))
@@ -51,8 +137,7 @@ class SourcemeterConversion(object):
         plist = []
         rest_param = param
         while len(rest_param) > 0 and rest_param[0] != ';':
-            if rest_param.startswith('['):
-                rest_param = rest_param[1:]
+            rest_param, bc = self._remove_bracket(rest_param)
             if rest_param.startswith('L'):
                 tmp = rest_param.split(';')
 
@@ -68,28 +153,43 @@ class SourcemeterConversion(object):
                 rest_param = rest_param[1:]
         return plist
 
+    def _match_l_inner(self, dt, match):
+        num_ls = ''
+        c = dt.split(match)[0]
+        while c.startswith('L'):
+            num_ls += 'L'
+            c = c[1:]
+        return '{}{}'.format(num_ls, dt.split(match)[-1])
+
     def _match_l(self, dt):
         if '$' in dt:
-            return dt.split('$')[-1]
-        return dt.split('/')[-1]
+            return self._match_l_inner(dt, '$')
+        elif '.' in dt:
+            return self._match_l_inner(dt, '.')
+        elif '/' in dt:
+            return self._match_l_inner(dt, '/')
+        else:
+            return dt
 
     def _match_dt(self, dt):
-        if '[' in dt:
-            dt = dt.replace('[', '')
-        return SM_DT[dt]
+        dt, bc = self._remove_bracket(dt)
+        try:
+            r = '[' * bc + SM_DT[dt]
+        except KeyError as e:
+            self._log.error('[SM MATCH] no such dt key: {} for long_name: {}'.format(dt, self._long_name))
+        return r
 
     def _match_return(self, ret):
-        if ret.startswith('['):
-            ret = ret[1:]
+        ret, bc = self._remove_bracket(ret)
         if not ret.startswith('L'):
-            return self._match_dt(ret)
+            return '[' * bc + self._match_dt(ret)
         else:
             # get everything between L and ; and return last part
-            return self._match_l(ret[1:-1])
+            return '[' * bc + self._match_l(ret[1:-1])
 
 
 class ComplexityJava(object):
-    """Extracts complextiy measures from the AST."""
+    """Extracts complexity measures from the AST."""
 
     def __init__(self, compilation_unit_ast):
         """Extract complexity measures from the compilation units AST."""
@@ -102,19 +202,44 @@ class ComplexityJava(object):
         ret_type = 'Void'
         if hasattr(method, 'return_type') and method.return_type:
             r = method.return_type
+
+            # see below
+            dim = ''
+            if hasattr(r, 'dimensions') and r.dimensions:
+                dim = '[' * len(r.dimensions)
+
+            # see below
             while hasattr(r, 'sub_type') and r.sub_type:
                 r = r.sub_type
-            ret_type = r.name
+
+            ret_type = '{}{}'.format(dim, r.name)
 
         params = []
         for param in method.parameters:
-            t = param.type  # we follow the chain because if we would not do that we would return java instead of ResultSet for java.sql.ResultSet
+            t = param.type
+
+            # we count dimensions which gives us the array informaiton, e.g., int[] or int[][], we also add this in sourcemeter notation
+            dim = ''
+            if hasattr(t, 'dimensions') and t.dimensions:
+                dim = '[' * len(t.dimensions)
+
+            # method(String... args)
+            if param.varargs:
+                dim = '['
+
+            # we follow the chain because if we would not do that we would return java instead of ResultSet for java.sql.ResultSet
             while hasattr(t, 'sub_type') and t.sub_type:
                 t = t.sub_type
-            params.append(t.name)
+
+            name = '{}{}'.format(dim, t.name)
+            params.append(name)
         return params, ret_type
 
     def _find_max_level(self):
+        """Find maximal level for Counting anonymous Classes.
+
+        A normal ClassDelcaration counts as one level, a ClassCreator counts only if it has inline methods defined.
+        """
         max_level = 0
         for path, method in self.ast:
 
@@ -123,7 +248,9 @@ class ComplexityJava(object):
 
             level = 0
             for i, p in enumerate(path):
-                if type(p).__name__ == 'ClassCreator' or type(p).__name__ == 'ClassDeclaration':
+                if type(p).__name__ == 'ClassDeclaration':
+                    level += 1
+                if type(p).__name__ == 'ClassCreator':
                     if 'MethodDeclaration' in [type(n).__name__ for n in path[i + 1]]:
                         level += 1
 
@@ -131,140 +258,123 @@ class ComplexityJava(object):
                 max_level = level
         return max_level + 1
 
-    def _find_ancestors(self, use_level=1):
-        acn = {}
-        ac = {}
-        for path, method in self.ast:
+    def _class_name(self, path):
+        """Return class name in Sourcemeter notation."""
+        names = []
+        for i, n in enumerate(path):
+            class_name = '$'.join(names)
+            if type(n).__name__ in ['ClassDeclaration', 'InterfaceDeclaration', 'EnumDeclaration']:
 
-            if type(method).__name__ != 'MethodDeclaration':
+                # in this case we have a named class inside a method we prepend the counter ala $1NamedClass
+                if type(path[i - 2]).__name__ == 'MethodDeclaration':
+                    names.append(str(self._count_map[n.position[0]][1]) + n.name)
+
+                # normal named class, just append the name
+                else:
+                    names.append(n.name)
+            elif type(n).__name__ == 'ClassCreator' and self._has_immediate_method(n):
+                names.append(str(self._count_map[n.position[0]][0]))
+        class_name = '$'.join(names)
+        return class_name
+
+    def _has_immediate_method(self, node):
+        """Check if the node has a method."""
+        for _, n1 in node:
+            if type(n1).__name__ == 'MethodDeclaration' and len(_) == 2:
+                return True
+        return False
+
+    def _parent_pos(self, path):
+        """Return parent position for our relevant node types."""
+        first = None
+        for n in reversed(path):
+            if type(n).__name__ not in ['ClassDeclaration', 'InterfaceDeclaration', 'EnumDeclaration', 'ClassCreator']:
                 continue
+            if type(n).__name__ in ['ClassDeclaration', 'InterfaceDeclaration', 'EnumDeclaration']:
+                first = n
+                break
+            if type(n).__name__ == 'ClassCreator' and self._has_immediate_method(n):
+                first = n
+                break
+        return first.position[0]
 
-            level = 0
-            for i, p in enumerate(path):
-                if type(p).__name__ == 'ClassCreator' or type(p).__name__ == 'ClassDeclaration':
-                    if 'MethodDeclaration' in [type(n).__name__ for n in path[i + 1]]:
+    def _parse_level_positions(self, ast, max_level=10):
+        """Count positions and levels for our relevant node types."""
+        for current_level in range(1, max_level):
+            for path, node in ast:
+                # these do not count towards levels
+                if type(node).__name__ not in ['ClassDeclaration', 'InterfaceDeclaration', 'EnumDeclaration', 'ClassCreator']:
+                    continue
+
+                # these count towards the levels
+                level = 0
+                for i, n in enumerate(path):
+                    if type(n).__name__ in ['ClassDeclaration', 'InterfaceDeclaration', 'EnumDeclaration']:
                         level += 1
-                        if level not in ac.keys():
-                            ac[level] = {}
-                            acn[level] = 0
-                        
-                        if type(p).__name__ == 'ClassCreator':
-                            acn[level] += 1
-                            ac[level][p.position[0]] = acn[level]
-                        else:
-                            ac[level][p.position[0]] = p.name
+                    if type(n).__name__ == 'ClassCreator' and self._has_immediate_method(n):
+                        level += 1
 
-        if use_level and use_level in ac.keys():
-            for pos in sorted(ac[use_level].keys()):
-                yield pos, ac[use_level][pos]
+                # evaluate the current level
+                if level == current_level:
+
+                    # we do only count classCreator nodes with inline methods
+                    if type(node).__name__ == 'ClassCreator' and not self._has_immediate_method(node):
+                        continue
+                    parent_pos = self._parent_pos(path)
+                    line = node.position[0]
+
+                    # sadly, we need two lists, one for ClassCreators with methods and another for named classes that are defined inside methods
+                    if parent_pos not in self._level_map.keys():
+                        self._level_map[parent_pos] = 0
+
+                    if parent_pos not in self._level_map2.keys():
+                        self._level_map2[parent_pos] = 0
+
+                    # only count pos for inline classes in methods
+                    if type(node).__name__ in ['ClassDeclaration', 'InterfaceDeclaration', 'EnumDeclaration'] and type(path[i - 1]).__name__ == 'MethodDeclaration':
+                        self._level_map2[parent_pos] += 1
+                    # or inline class creators with methods
+                    if type(node).__name__ == 'ClassCreator' and self._has_immediate_method(node):
+                        self._level_map[parent_pos] += 1
+
+                    pos1 = self._level_map[parent_pos]
+                    pos2 = self._level_map2[parent_pos]
+                    self._count_map[line] = (pos1, pos2)
 
     def cognitive_complexity(self):
-        """Generate complexity metrics for each method in a declared class (not anonymous classes!)."""
-        # first generate order for anonymous functions on nesting level and position in the file
-        self.ac = {}
-        self.acn = {}
+        """Extract complexity metrics for all methods of the current file."""
+        self._level_map = {}
+        self._level_map2 = {}
+        self._count_map = {}
 
-        max_level = self._find_max_level()
-        for i in range(1, max_level):
-            self.ac[i] = {}
-            self.acn[i] = 0
-            for pos, line in self._find_ancestors(i):
-                if type(line).__name__ == 'int':
-                    self.acn[i] += 1
-                    self.ac[i][pos] = self.acn[i]
-                else:
-                    self.ac[i][pos] = line
+        self._parse_level_positions(self.ast, self._find_max_level())
 
         package = None
         for path, node in self.ast.filter(javalang.tree.PackageDeclaration):
             package = node.name
 
-        # evaluate interfaces, missing: inner interfaces
-        for path, node in self.ast.filter(javalang.tree.InterfaceDeclaration):
+        for path, method in self.ast:
 
-            class_name = node.name
+            # we only are interested in methods and constructors
+            if type(method).__name__ not in ['MethodDeclaration', 'ConstructorDeclaration']:
+                continue
 
-            for n in path:
-                if type(n).__name__ == 'ClassDeclaration':
-                    class_name = '{}${}'.format(n.name, class_name)
+            full_name = self._class_name(path)
 
-            for method in node.methods:
-                method_name = method.name
-                self._log.debug('evaluating package {}, class {}, method {}'.format(package, class_name, method_name))
+            method_name = method.name
+            if type(method).__name__ in 'ConstructorDeclaration':
+                method_name = '<init>'  # sourcemeter notation
 
-                cogcs = self.cognitive_complexity_sonar(method)
-                cc = self.cyclomatic_complexity(method)
-                params, ret_type = self._method_params(method)
-                yield {'package_name': package, 'class_name': class_name, 'method_name': method_name, 'return_type': ret_type, 'parameter_types': params, 'cognitive_complexity_sonar': cogcs, 'cyclomatic_complexity': cc, 'is_interface_method': True}
+            self._log.debug('evaluating package {}, class {}, method {}'.format(package, full_name, method_name))
 
-        # here we only count anonymous methods, we rely on the count in anonymous_classes_
-        for path, method in self.ast.filter(javalang.tree.MethodDeclaration):
+            # gather metrics from the metric ast
+            cogcs = self.cognitive_complexity_sonar(method)
+            cc = self.cyclomatic_complexity(method)
+            params, ret_type = self._method_params(method)
 
-            # this is kind of a hacky way to do this, basically we discard methods of InterfaceDeclarations
-            for n in path:
-                if type(n).__name__ == 'InterfaceDeclaration':
-                    break
-            else:
-                ano_name = []
-                for i, n in enumerate(path):
-                    if type(n).__name__ == 'ClassCreator' or type(n).__name__ == 'ClassDeclaration':
-                        if 'MethodDeclaration' in [type(n1).__name__ for n1 in path[i + 1]]:
-                            line = n.position[0]
-                            for i in range(1, max_level):
-                                if line in self.ac[i].keys():
-                                    ano_name.append(self.ac[i][line])
-                                # print('line: {} in level: {}'.format(line, i))
-                if ano_name:
-                    # we travel along the path to find the classdeclaration in which we are encountered (we could in theory add the method but Sourcemeter doesnt do it that way)
-
-                    # it may happen that we miss a Class Name in the path because that class does not have other methods
-                    for n2 in path:
-                        if type(n2).__name__ == 'ClassDeclaration':
-                            class_name = n2.name
-                            break
-
-                    full_name = '$'.join([str(p) for p in ano_name])
-
-                    # in that case we prepend the name here
-                    if not full_name.startswith(class_name):
-                        full_name = '{}${}'.format(class_name, full_name)
-
-                    method_name = method.name
-                    self._log.debug('evaluating package {}, class {}, method {}'.format(package, full_name, method_name))
-
-                    cogcs = self.cognitive_complexity_sonar(method)
-                    cc = self.cyclomatic_complexity(method)
-                    params, ret_type = self._method_params(method)
-                    yield {'package_name': package, 'class_name': full_name, 'method_name': method_name, 'return_type': ret_type, 'parameter_types': params, 'cognitive_complexity_sonar': cogcs, 'cyclomatic_complexity': cc, 'is_interface_method': False}
-
-        # here we only count declared classes (including nested!)
-        for path, node in self.ast.filter(javalang.tree.ClassDeclaration):
-            # detect class_name
-            class_name = node.name
-            # if we encounter a encapsulating class we prepend it (nested class)
-            for n in path:
-                if type(n).__name__ == 'ClassDeclaration':
-                    class_name = '{}${}'.format(n.name, class_name)  # the notation is for better matching sourcemeter
-
-            # strictly not a MethodDeclaration, we may have to change some things
-            for method in node.constructors:
-                method_name = '<init>'  # the notation is for better matching sourcemeter
-                self._log.debug('evaluating package {}, class {}, method {}'.format(package, class_name, method_name))
-
-                cogcs = self.cognitive_complexity_sonar(method)
-                cc = self.cyclomatic_complexity(method)
-                params, ret_type = self._method_params(method)
-                yield {'package_name': package, 'class_name': class_name, 'method_name': method_name, 'return_type': ret_type, 'parameter_types': params, 'cognitive_complexity_sonar': cogcs, 'cyclomatic_complexity': cc, 'is_interface_method': False}
-
-            # normal class methods
-            for method in node.methods:
-                method_name = method.name
-                self._log.debug('evaluating package {}, class {}, method {}'.format(package, class_name, method_name))
-
-                cogcs = self.cognitive_complexity_sonar(method)
-                cc = self.cyclomatic_complexity(method)
-                params, ret_type = self._method_params(method)
-                yield {'package_name': package, 'class_name': class_name, 'method_name': method_name, 'return_type': ret_type, 'parameter_types': params, 'cognitive_complexity_sonar': cogcs, 'cyclomatic_complexity': cc, 'is_interface_method': False}
+            # we may have interface methods with a body (default methods)
+            im = method.body is None
+            yield {'package_name': package, 'class_name': full_name, 'method_name': method_name, 'return_type': ret_type, 'parameter_types': params, 'cognitive_complexity_sonar': cogcs, 'cyclomatic_complexity': cc, 'is_interface_method': im}
 
     def cognitive_complexity_sonar(self, method):
         """Extract cognitive complexity.
@@ -278,7 +388,7 @@ class ComplexityJava(object):
         return cogcs
 
     def cyclomatic_complexity(self, method):
-        """Extract cyclomatic complexity."""
+        """Extract cyclomatic complexity (not really, we just count branch types)."""
         cc = 1
         for c, n in method:
             if type(n).__name__ in JAVA_BRANCH_TYPES_MCCC:

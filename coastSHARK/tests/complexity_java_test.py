@@ -359,39 +359,139 @@ LONG_NAME6 = """org.openintents.safe.CryptoContentProvider.query(Landroid/net/Ur
 LONG_NAME7 = """org.openintents.distribution.EulaActivity$1.onClick(Landroid/view/View;)V"""
 LONG_NAME8 = """org.openintents.distribution.AboutDialog.<init>(Landroid/content/Context;)V"""
 LONG_NAME9 = """estreamj.ciphers.trivium.Trivium$Maker.getName()Ljava/lang/String;"""
-
+LONG_NAME10 = """de.guoe.cs.test(D)Ljava/lang/String;"""
+LONG_NAME11 = """org.apache.zookeeper.ZKParameterized$RunnerFactory.createRunnerForTestWithParameters(LTestWithParameters;)Lorg.junit.runner.Runner;"""
+# LONG_NAME12 = """"""
+# LONG_NAME13 = """de.guoe.cs.test(LLString;L)V"""
 
 NESTED_ANO_TEST = """package de.ugoe.cs.coast;
 
 public class NestedAnoTest {
-    
-    private class importTask {
-        protected void onPostExecute(String result) {
-            Dialog about = new AlertDialog.Builder(CategoryList.this)
-                                                            .setIcon(R.drawable.passicon)
-                                                            .setTitle(R.string.import_complete)
-                                                            .setPositiveButton(R.string.yes,
-                                                                            new DialogInterface.OnClickListener() {
-                                                                                    public void onClick(int whichButton) {
-                                                                                            File csvFile = new File(
-                                                                                                            importedFilename);
-                                                                                            // csvFile.delete();
-                                                                                            SecureDelete.delete(csvFile);
-                                                                                            importedFilename = "";
-                                                                                    }
-                                                                            })
-                                                            .setNegativeButton(R.string.no,
-                                                                            new DialogInterface.OnClickListener() {
-                                                                                    public void onClick(DialogInterface dialog,
-                                                                                                    int whichButton) {
-                                                                                    }
-                                                                            }).setMessage(deleteMsg).create();
-                                            about.show();
 
+    private class importTask {
+
+        private class importTask2 {
+            protected void onPostExecute(String result) {
+                Dialog about = new AlertDialog.Builder(CategoryList.this)
+                                                                .setIcon(R.drawable.passicon)
+                                                                .setTitle(R.string.import_complete)
+                                                                .setPositiveButton(R.string.yes,
+                                                                                new DialogInterface.OnClickListener() {
+                                                                                        public void onClick(int whichButton) {
+                                                                                                File csvFile = new File(
+                                                                                                                importedFilename);
+                                                                                                // csvFile.delete();
+                                                                                                SecureDelete.delete(csvFile);
+                                                                                                importedFilename = "";
+                                                                                        }
+                                                                                })
+                                                                .setNegativeButton(R.string.no,
+                                                                                new DialogInterface.OnClickListener() {
+                                                                                        public void onClick(DialogInterface dialog,
+                                                                                                        int whichButton) {
+                                                                                        }
+                                                                                }).setMessage(deleteMsg).create();
+                                                about.show();
+
+            }
         }
     }
 }
 """
+
+
+NESTED_NAMED_TEST = """package de.ugoe.cs.coast;
+
+public class NestedNamedTest {
+
+    private void puit() {
+
+    }
+
+    private class importTask {
+
+        private void zoot() {
+        }
+
+        private class importTask2 {
+            private importTask2() {
+            }
+            private Void narf() {
+            }
+        }
+    }
+}
+"""
+
+NESTED_INTERFACE_TEST = """package de.ugoe.cs.coast;
+
+public interface NestedInterfaceTest {
+
+    public class TestClass {
+        public void test1() {
+        }
+    }
+}
+"""
+
+
+LONG_NAME_CONVERSION_TEST = """package de.ugoe.cs.coast;
+
+public class LongNameConversionTest {
+
+    public void test1(String a, long b, int i) {
+    }
+
+    public String[] test2(int[] a, byte[][] b) {
+    }
+
+    public String test3(long a, String[] b, long c) {
+    }
+
+    public void test4(K key, V value) {
+    }
+}
+"""
+
+
+OBJECT_NAME_TEST = """package de.ugoe.cs.coast;
+
+public class ObjectNameTest {
+
+    public java.lang.Object test1(Object K, java.lang.Object V) {
+    }
+}
+"""
+
+
+ENUM_TEST = """package de.ugoe.cs.coast;
+
+public enum EnumTest {
+
+    PERSISTENT_SEQUENTIAL_WITH_TTL(6, false, true, false, true);
+
+    EnumTest() {
+    }
+
+    public void test1(int a) {
+    }
+}
+"""
+
+ARRAY_TEST = """package de.ugoe.cs.coast;
+public class Pinky {
+    private bytes[] narf(java.lang.String[][] args, int[] a, float b) {
+    }
+}
+"""
+
+VARARGS_TEST = """package de.ugoe.cs.coast;
+public class Pinky {
+    private void narf(int a, String... args) {
+    }
+}
+"""
+
 
 # todo:
 # - anonymous class in named inner class
@@ -413,16 +513,75 @@ public class NestedAnoTest {
 
 class ComplexityJavaTest(unittest.TestCase):
 
+    def test_array(self):
+        ast = javalang.parse.parse(ARRAY_TEST)
+        cj = ComplexityJava(ast)
+        m = list(cj.cognitive_complexity())
+        self.assertEqual(m[0]['method_name'], 'narf')
+        self.assertEqual(m[0]['parameter_types'], ['[[String', '[int', 'float'])
+        self.assertEqual(m[0]['return_type'], '[bytes')
+
+    def test_varargs(self):
+        ast = javalang.parse.parse(VARARGS_TEST)
+        cj = ComplexityJava(ast)
+        m = list(cj.cognitive_complexity())
+        self.assertEqual(m[0]['method_name'], 'narf')
+        self.assertEqual(m[0]['parameter_types'], ['int', '[String'])
+        self.assertEqual(m[0]['return_type'], 'Void')
+
+    def test_enum(self):
+        ast = javalang.parse.parse(ENUM_TEST)
+        cj = ComplexityJava(ast)
+        m = list(cj.cognitive_complexity())
+
+        self.assertEqual(m[0]['class_name'], 'EnumTest')
+        self.assertEqual(m[0]['method_name'], '<init>')
+        self.assertEqual(m[0]['parameter_types'], [])
+
+        self.assertEqual(m[1]['class_name'], 'EnumTest')
+        self.assertEqual(m[1]['method_name'], 'test1')
+        self.assertEqual(m[1]['parameter_types'], ['int'])
+
+    def test_object_name(self):
+        ast = javalang.parse.parse(OBJECT_NAME_TEST)
+        cj = ComplexityJava(ast)
+        m = list(cj.cognitive_complexity())
+
+        self.assertEqual(m[0]['class_name'], 'ObjectNameTest')
+        self.assertEqual(m[0]['method_name'], 'test1')
+        self.assertEqual(m[0]['parameter_types'], ['Object', 'Object'])
+
+    def test_nested_interface(self):
+        ast = javalang.parse.parse(NESTED_INTERFACE_TEST)
+        cj = ComplexityJava(ast)
+        m = list(cj.cognitive_complexity())
+
+        self.assertEqual(m[0]['class_name'], 'NestedInterfaceTest$TestClass')
+        self.assertEqual(m[0]['method_name'], 'test1')
+
+    def test_nested_named(self):
+        ast = javalang.parse.parse(NESTED_NAMED_TEST)
+        cj = ComplexityJava(ast)
+        m = list(cj.cognitive_complexity())
+        self.assertEqual(m[0]['method_name'], 'puit')
+        self.assertEqual(m[0]['class_name'], 'NestedNamedTest')
+        self.assertEqual(m[1]['method_name'], 'zoot')
+        self.assertEqual(m[1]['class_name'], 'NestedNamedTest$importTask')
+        self.assertEqual(m[2]['method_name'], '<init>')
+        self.assertEqual(m[2]['class_name'], 'NestedNamedTest$importTask$importTask2')
+        self.assertEqual(m[3]['method_name'], 'narf')
+        self.assertEqual(m[3]['class_name'], 'NestedNamedTest$importTask$importTask2')
+
     def test_nested_ano(self):
         ast = javalang.parse.parse(NESTED_ANO_TEST)
         cj = ComplexityJava(ast)
         m = list(cj.cognitive_complexity())
         self.assertEqual(m[1]['method_name'], 'onClick')
-        self.assertEqual(m[1]['class_name'], 'NestedAnoTest$importTask$1')
+        self.assertEqual(m[1]['class_name'], 'NestedAnoTest$importTask$importTask2$1')
         self.assertEqual(m[2]['method_name'], 'onClick')
-        self.assertEqual(m[2]['class_name'], 'NestedAnoTest$importTask$2')
+        self.assertEqual(m[2]['class_name'], 'NestedAnoTest$importTask$importTask2$2')
         self.assertEqual(m[0]['method_name'], 'onPostExecute')
-        self.assertEqual(m[0]['class_name'], 'NestedAnoTest$importTask')
+        self.assertEqual(m[0]['class_name'], 'NestedAnoTest$importTask$importTask2')
 
     def test_cc_class(self):
         ast = javalang.parse.parse(CC_TEST)
@@ -475,6 +634,8 @@ class ComplexityJavaTest(unittest.TestCase):
         cj = ComplexityJava(ast)
 
         m = list(cj.cognitive_complexity())
+        self.assertEqual(m[0]['method_name'], 'test1')
+        self.assertEqual(m[0]['class_name'], 'ParamTest')
         self.assertEqual(m[1]['method_name'], 'test2')
         self.assertEqual(m[1]['class_name'], 'ParamTest$ParamTest2')
 
@@ -505,7 +666,7 @@ class ComplexityJavaTest(unittest.TestCase):
         sc = SourcemeterConversion()
         tmp = sc.get_sm_params(LONG_NAME2)
         self.assertEqual(tmp[0], ['List'])
-        self.assertEqual(tmp[1], 'long')
+        self.assertEqual(tmp[1], '[long')
 
     def test_sourcemeter_conversion3(self):
         sc = SourcemeterConversion()
@@ -548,6 +709,57 @@ class ComplexityJavaTest(unittest.TestCase):
         tmp = sc.get_sm_params(LONG_NAME9)
         self.assertEqual(tmp[0], [])
         self.assertEqual(tmp[1], 'String')
+
+    def test_sourcemeter_conversion10(self):
+        sc = SourcemeterConversion()
+        tmp = sc.get_sm_params(LONG_NAME10)
+        self.assertEqual(tmp[0], ['double'])
+        self.assertEqual(tmp[1], 'String')
+
+    def test_sourcemeter_conversion11(self):
+        sc = SourcemeterConversion()
+        tmp = sc.get_sm_params(LONG_NAME11)
+        self.assertEqual(tmp[0], ['TestWithParameters'])
+        self.assertEqual(tmp[1], 'Runner')
+
+    def test_long_name_conversion(self):
+        ast = javalang.parse.parse(LONG_NAME_CONVERSION_TEST)
+        cj = ComplexityJava(ast)
+        l = list(cj.cognitive_complexity())
+
+        sc = SourcemeterConversion()
+        ln1, lnl1 = sc.get_sm_long_name(l[0])
+        ln2, lnl2 = sc.get_sm_long_name(l[1])
+        ln3, lnl3 = sc.get_sm_long_name(l[2])
+        ln4, lnl4 = sc.get_sm_long_name(l[3])
+
+        self.assertEqual('de.ugoe.cs.coast.LongNameConversionTest.test1(LString;JI)V', ln1)
+        self.assertEqual('de.ugoe.cs.coast.LongNameConversionTest.test1(LString;LI)V', lnl1)
+        self.assertEqual('de.ugoe.cs.coast.LongNameConversionTest.test2([I[[B)[LString;', ln2)
+
+        self.assertEqual('de.ugoe.cs.coast.LongNameConversionTest.test3(J[LString;J)LString;', ln3)
+        self.assertEqual('de.ugoe.cs.coast.LongNameConversionTest.test3(L[LString;L)LString;', lnl3)
+
+        self.assertEqual('de.ugoe.cs.coast.LongNameConversionTest.test4(LK;LV;)V', ln4)
+
+    def test_sourcemeter_long_name_conversion(self):
+        sc = SourcemeterConversion()
+        tmp = sc.get_sm_long_name2('de.ugoe.cs.test.LongNameConversionTest.test1(LLjava/lang/String;IL)V')
+        self.assertEqual('de.ugoe.cs.test.LongNameConversionTest.test1(LLString;IL)V', tmp)
+        # this should alos not change anymore
+        tmp2 = sc.get_sm_long_name2(tmp)
+        self.assertEqual('de.ugoe.cs.test.LongNameConversionTest.test1(LLString;IL)V', tmp2)
+
+        tmp3 = sc.get_sm_long_name2('de.ugoe.cs.test(D)LStatement;')
+        self.assertEqual('de.ugoe.cs.test(D)LStatement;', tmp3)
+        tmp3 = sc.get_sm_long_name2('de.ugoe.cs.test(Ljava/lang/Long;)Ljava/lang/Long;')
+        self.assertEqual('de.ugoe.cs.test(J)J', tmp3)
+
+        tmp4 = sc.get_sm_long_name2('de.ugoe.cs.test([[J)V')
+        self.assertEqual('de.ugoe.cs.test([[J)V', tmp4)
+
+        tmp5 = sc.get_sm_long_name2('org.apache.zookeeper.JaasConfiguration.addSection(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V')
+        self.assertEqual('org.apache.zookeeper.JaasConfiguration.addSection(LString;LString;[LString;)V', tmp5)
 
     def test_overloading(self):
         ast = javalang.parse.parse(OVERLOADING_TEST)

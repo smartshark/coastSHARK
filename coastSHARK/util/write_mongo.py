@@ -71,15 +71,37 @@ class MongoDb(object):
 
         for m in method_data:
             path = '{}.{}.{}('.format(m['package_name'], m['class_name'], m['method_name'])
+            match_long_name = sc.get_sm_long_name(m)
 
             if CodeEntityState.objects.filter(long_name__startswith=path, commit_id=c.id, file_id=f.id, ce_type='method').count() == 0:
-                self._log.error('no such method found, long_name: {}, commit_id: {}, file_id: {}, probably nested class'.format(path, c.id, f.id))
+                self._log.error('[METHOD NOT FOUND] long_name: {}, commit_id: {}, file_id: {}, probably wrong method path'.format(path, c.id, f.id))
                 continue
 
-            for ces in CodeEntityState.objects.filter(long_name__startswith=path, commit_id=c.id, file_id=f.id, ce_type='method'):
-                param_types, return_type = sc.get_sm_params(ces.long_name)
+            # we have only one match, this is simple as we just write the data
+            if CodeEntityState.objects.filter(long_name__startswith=path, commit_id=c.id, file_id=f.id, ce_type='method').count() == 1:
+                ces = CodeEntityState.objects.filter(long_name__startswith=path, commit_id=c.id, file_id=f.id, ce_type='method')[0]
+                long_name = ces.long_name
 
-                if param_types == m['parameter_types'] and return_type == m['return_type']:
+                s_key = get_code_entity_state_identifier(long_name, c.id, f.id)
+                tmp = {}
+                tmp['set__metrics__cognitive_complexity_sonar'] = m['cognitive_complexity_sonar']
+                tmp['set__metrics__cyclomatic_complexity_test'] = m['cyclomatic_complexity']
+
+                CodeEntityState.objects(s_key=s_key).upsert_one(**tmp)
+                continue
+
+            # we have more than one we need to match method signatures
+            for ces in CodeEntityState.objects.filter(long_name__startswith=path, commit_id=c.id, file_id=f.id, ce_type='method'):
+
+                # we just remove dots, $ and / from params in this so that we have a chance to match against our match_long_name
+                match_long_name2 = sc.get_sm_long_name2(ces.long_name)
+
+                # new way:, first one is with long = J second with long = L
+                # does not work with_ org.apache.zookeeper.server.quorum.Zab1_0Test$5.proposeNewSession(LQuorumPacket;LL)V
+                # this gets merged to org.apache.zookeeper.server.quorum.Zab1_0Test$5.proposeNewSession(LQuorumPacket;LL;)V
+                # therefore we include the original long name
+                if match_long_name[0] == match_long_name2 or match_long_name[1] == match_long_name2 or ces.long_name in match_long_name:
+
                     long_name = ces.long_name
 
                     s_key = get_code_entity_state_identifier(long_name, c.id, f.id)
@@ -90,7 +112,7 @@ class MongoDb(object):
                     CodeEntityState.objects(s_key=s_key).upsert_one(**tmp)
                     break
             else:
-                self._log.error('[NO MATCH] have: path: {}, params: {}, return_type: {}'.format(path, m['parameter_types'], m['return_type']))
+                self._log.error('[NO MATCH] have: path: {}, params: {}, return_type: {}, merged long_name: {}'.format(path, m['parameter_types'], m['return_type'], match_long_name))
                 for c1 in CodeEntityState.objects.filter(long_name__startswith=path, commit_id=c.id, file_id=f.id, ce_type='method'):
                     param, ret = sc.get_sm_params(c1.long_name)
-                    self._log.error('[NO MATCH] searched: long_name: {}, params: {}, return_type: {}'.format(c1.long_name, param, ret))
+                    self._log.error('[NO MATCH] searched: long_name: {}, params: {}, return_type: {}, merged long_name: {}'.format(c1.long_name, param, ret, match_long_name2))
