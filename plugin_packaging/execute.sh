@@ -4,10 +4,10 @@ PLUGIN_PATH=$3
 REPOSITORY_PATH=$2
 NEW_UUID=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 
-cp -R $REPOSITORY_PATH "/dev/shm/$NEW_UUID"
+cp -R $REPOSITORY_PATH "/dev/shm/$NEW_UUID" || exit 1
 
-cd "/dev/shm/$NEW_UUID"
-git checkout -f --quiet $1
+cd "/dev/shm/$NEW_UUID" || exit 1
+git checkout -f --quiet $1 || exit 1
 
 COMMAND="python3.5 $PLUGIN_PATH/smartshark_plugin.py --url $4 -DB $7 -H $8 -p $9 -r $1 -i /dev/shm/$NEW_UUID/"
 
