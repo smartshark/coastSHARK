@@ -1,7 +1,7 @@
 {
     "name": "coastSHARK",
     "author": "Alexander Trautsch",
-    "version": "1.02",
+    "version": "1.03",
     "plugin_type": "rev",
     "description": "Collects AST Data.",
     "linux_libraries": [],
@@ -110,6 +110,13 @@
             "position": 12,
             "type": "execute",
             "description": "Log level for stdout (DEBUG, INFO), default INFO."
+        },
+        {
+            "name": "method_metrics",
+            "required": false,
+            "position": 13,
+            "type": "execute",
+            "description": "Collet new method metrics (java only, experimental)."
         }
     ]
 }

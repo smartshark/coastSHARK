@@ -70,6 +70,9 @@ def main(args):
                     e.load()
                     m.write_line(mongo_filepath, e.imports, e.node_count, e.type_counts)
 
+                    if args.method_metrics:
+                        m.write_method_metrics(mongo_filepath, e.method_metrics())
+
             # this is not critical, we can still do the other files
             except error.ParserException as e:
                 log.info(str(e))
@@ -87,4 +90,5 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Analyze the given Path.')
     parser.add_argument('-i', '--input', help='Path to the checked out repository directory', required=True)
+    parser.add_argument('-mm', '--method_metrics', help='Collect new method metrics (experimental)', default=False)
     main(parser.parse_args())

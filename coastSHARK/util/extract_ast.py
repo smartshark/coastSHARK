@@ -142,6 +142,11 @@ class ExtractAstJava(object):
         self.node_count = 0
         self.filename = filename
 
+    def method_metrics(self):
+        # new complexity metrics
+        cj = ComplexityJava(self.astdata)
+        return list(cj.cognitive_complexity())  # we list() here because cognitive_complexity is a generator
+
     def load(self):
         """Read the AST."""
         try:
@@ -157,11 +162,7 @@ class ExtractAstJava(object):
 
         assert self.astdata is not None
 
-        # new complexity metrics
-        cj = ComplexityJava(self.astdata)
-        self.method_metrics = list(cj.cognitive_complexity())  # we list() here because cognitive_complexity is a generator
-
-        for path, node in self.astdata:
+        for path, node in self.astdata.walk_tree_iterative():
             type_name = type(node).__name__
 
             self.node_count += 1

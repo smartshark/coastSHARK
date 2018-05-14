@@ -10,10 +10,10 @@ if not sys.version_info[0] == 3:
 
 setup(
     name='coastSHARK',
-    version='1.0.2',
+    version='1.0.3',
     description='Collect AST Information for smartSHARK.',
-    install_requires=['javalang>=0.13.0', 'mongoengine', 'pymongo', 'pycoshark>=1.0.21'],
-    dependency_links=['git+https://github.com/smartshark/pycoSHARK.git@1.0.21#egg=pycoshark-1.0.21', 'git+https://github.com/atrautsch/javalang.git#egg=javalang-0.13.0'],
+    install_requires=['javalang>=0.13.1', 'mongoengine', 'pymongo', 'pycoshark>=1.0.21'],
+    dependency_links=['git+https://github.com/smartshark/pycoSHARK.git@1.0.21#egg=pycoshark-1.0.21', 'git+https://github.com/atrautsch/javalang.git#egg=javalang-0.13.1'],
     author='atrautsch',
     author_email='alexander.trautsch@stud.uni-goettingen.de',
     url='https://github.com/smartshark/coastSHARK',

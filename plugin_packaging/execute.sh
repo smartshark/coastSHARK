@@ -32,6 +32,10 @@ if [ ! -z ${12+x} ] && [ ${12} != "None" ]; then
     COMMAND="$COMMAND -ll ${12}"
 fi
 
+if [ ! -z ${13+x} ] && [ ${13} != "None" ]; then
+    COMMAND="$COMMAND -mm ${13}"
+fi
+
 $COMMAND
 
 
