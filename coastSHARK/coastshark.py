@@ -13,7 +13,6 @@ from util.extract_ast import ExtractAstPython, ExtractAstJava
 from util.write_csv import CsvFile
 
 # set up logging, we log everything to stdout except for errors which go to stderr
-# this is then picked up by serverSHARK
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 i = logging.StreamHandler(sys.stdout)
@@ -61,11 +60,13 @@ def main(args):
 
             try:
                 if file.endswith('.py'):
+                    log.info('parsing: {}'.format(mongo_filepath))
                     e = ExtractAstPython(filepath)
                     e.load()
                     m.write_line(mongo_filepath, e.imports, e.node_count, e.type_counts)
 
                 if file.endswith('.java'):
+                    log.info('parsing: {}'.format(mongo_filepath))
                     e = ExtractAstJava(filepath)
                     e.load()
                     m.write_line(mongo_filepath, e.imports, e.node_count, e.type_counts)
