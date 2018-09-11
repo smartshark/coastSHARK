@@ -60,13 +60,13 @@ def main(args):
 
             try:
                 if file.endswith('.py'):
-                    log.info('parsing: {}'.format(mongo_filepath))
+                    log.debug('parsing: {}'.format(mongo_filepath))
                     e = ExtractAstPython(filepath)
                     e.load()
                     m.write_line(mongo_filepath, e.imports, e.node_count, e.type_counts)
 
                 if file.endswith('.java'):
-                    log.info('parsing: {}'.format(mongo_filepath))
+                    log.debug('parsing: {}'.format(mongo_filepath))
                     e = ExtractAstJava(filepath)
                     e.load()
                     m.write_line(mongo_filepath, e.imports, e.node_count, e.type_counts)

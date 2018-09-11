@@ -3,6 +3,38 @@
         {
             "collection_name": "code_entity_state",
             "fields": [
+                {  
+                   "type":"ObjectIdType",
+                   "logical_type":"OID",
+                   "field_name":"_id",
+                   "desc": "Identifier of the document"
+                },
+                {
+                   "type":"StringType",
+                   "logical_type":"Name",
+                   "field_name":"long_name",
+                   "desc": "long name of the code entity (e.g., file path or class name or method name with arguments"
+                },
+                {  
+                   "type":"ObjectIdType",
+                   "logical_type":"RID",
+                   "reference_to": "commit",
+                   "field_name":"commit_id",
+                   "desc": "ObjectID of the commit to which this specific state is related to"
+                },
+                {  
+                   "type":"ObjectIdType",
+                   "logical_type":"RID",
+                   "reference_to": "file",
+                   "field_name":"file_id",
+                   "desc": "ObjectID of the file to which this specific state is related to"
+                },
+                {  
+                   "type":"StringType",
+                   "logical_type":"AbstractionLevel",
+                   "field_name":"ce_type",
+                   "desc": "Abstraction level of the entity (e.g., class, attribute, enum, interface, method, function, annotation, module)"
+                },
                 {
                     "desc": "Imports in this file. Extracted from the AST.",
                     "field_name": "imports",
