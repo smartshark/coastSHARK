@@ -1,7 +1,7 @@
 {
     "name": "coastSHARK",
     "author": "Alexander Trautsch",
-    "version": "1.03",
+    "version": "1.04",
     "plugin_type": "rev",
     "description": "Collects AST Data.",
     "linux_libraries": [],

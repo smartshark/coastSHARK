@@ -99,7 +99,7 @@ def main(args):
 
 if __name__ == '__main__':
     # we basically re-use the vcsSHARK argparse config here
-    parser = get_base_argparser('Analyze the given URI. An URI should be a checked out GIT Repository.', '1.0.3')
+    parser = get_base_argparser('Analyze the given URI. An URI should be a checked out GIT Repository.', '1.0.4')
     parser.add_argument('-i', '--input', help='Path to the checked out repository directory', required=True)
     parser.add_argument('-r', '--rev', help='Hash of the revision.', required=True)
     parser.add_argument('-u', '--url', help='URL of the project (e.g., GIT Url).', required=True)
