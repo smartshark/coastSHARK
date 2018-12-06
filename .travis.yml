@@ -3,28 +3,28 @@ language: python
 python:
   - "3.5"
 
-services:
-  - docker
-
 before_install:
-  - printenv | grep -E '^TRAVIS_' > .env
-  - docker build -t sharkdocker .
-
-install:
-  - docker run sharkdocker /bin/sh -c "cd /root/coastshark; python3.5 setup.py install"
+  - pip install Sphinx
+  - pip install sphinx_rtd_theme
 
 script:
-  - docker run sharkdocker /bin/sh -c "cd /root/coastshark; python3.5 setup.py test"
+  - python setup.py install
+  - make html
 
 after_success:
-  - docker run --env-file .env sharkdocker /bin/bash -c "cd /root/coastshark; make deploy > /dev/null"
-  - SRD=`docker ps -alq` && docker cp $SRD:/root/coastshark/plugin_packaging/coastSHARK_plugin.tar .
+  - cd plugin_packaging && ./build_plugin.sh
 
 deploy:
-  provider: releases
-  api_key: ${TRAVIS_GH_TOKEN}
-  file: "coastSHARK_plugin.tar"
-  skip_cleanup: true
-  on:
-    repo: smartshark/coastSHARK
-    tags: true
+  - provider: releases
+    api_key: ${GH_TOKEN}
+    file: "plugin_packaging/coastSHARK_plugin.tar"
+    skip_cleanup: true
+    on:
+      repo: smartshark/coastSHARK
+      tags: true
+  - provider: pages
+    github-token: ${GH_TOKEN}
+    local-dir: $TRAVIS_BUILD_DIR/docs/build
+    skip-cleanup: true  
+    on:
+      branch: master

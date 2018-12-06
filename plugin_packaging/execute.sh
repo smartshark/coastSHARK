@@ -9,31 +9,31 @@ cp -R $REPOSITORY_PATH "/dev/shm/$NEW_UUID" || exit 1
 cd "/dev/shm/$NEW_UUID" || exit 1
 git checkout -f --quiet $1 || exit 1
 
-COMMAND="python3.5 $PLUGIN_PATH/smartshark_plugin.py --url $4 -DB $7 -H $8 -p $9 -r $1 -i /dev/shm/$NEW_UUID/"
+COMMAND="python3.5 $PLUGIN_PATH/smartshark_plugin.py --url $4 --project_name ${5} -DB $8 -H $9 -p ${10} -r $1 -i /dev/shm/$NEW_UUID/"
 
-
-if [ ! -z ${5+x} ] && [ ${5} != "None" ]; then
-	COMMAND="$COMMAND --db-user ${5}"
-fi
 
 if [ ! -z ${6+x} ] && [ ${6} != "None" ]; then
-	COMMAND="$COMMAND --db-password ${6}"
+	COMMAND="$COMMAND --db-user ${6}"
 fi
 
-if [ ! -z ${10+x} ] && [ ${10} != "None" ]; then
-	COMMAND="$COMMAND --db-authentication ${10}"
+if [ ! -z ${7+x} ] && [ ${7} != "None" ]; then
+	COMMAND="$COMMAND --db-password ${7}"
 fi
 
 if [ ! -z ${11+x} ] && [ ${11} != "None" ]; then
-	COMMAND="$COMMAND --ssl"
+	COMMAND="$COMMAND --db-authentication ${11}"
 fi
 
 if [ ! -z ${12+x} ] && [ ${12} != "None" ]; then
-    COMMAND="$COMMAND -ll ${12}"
+	COMMAND="$COMMAND --ssl"
 fi
 
 if [ ! -z ${13+x} ] && [ ${13} != "None" ]; then
-    COMMAND="$COMMAND -mm ${13}"
+    COMMAND="$COMMAND -ll ${13}"
+fi
+
+if [ ! -z ${14+x} ] && [ ${14} != "None" ]; then
+    COMMAND="$COMMAND -mm ${14}"
 fi
 
 $COMMAND
