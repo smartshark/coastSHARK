@@ -5,12 +5,12 @@ python:
 
 before_install:
   - sudo apt-get install -y build-essential wget git python3-pip python3-cffi
-  - sudo pip3 install -U pip setuptools
-  - sudo pip3 install Sphinx
-  - sudo pip3 install sphinx_rtd_theme
+  - sudo pip install -U pip setuptools
+  - sudo pip install Sphinx
+  - sudo pip install sphinx_rtd_theme
 
 script:
-  - sudo python3 setup.py install
+  - sudo python setup.py install
   - make html
 
 after_success:
