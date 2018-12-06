@@ -8,17 +8,16 @@ before_install:
   - sudo pip3 install -U pip setuptools
   - sudo pip3 install Sphinx
   - sudo pip3 install sphinx_rtd_theme
-  - sudo pip3 install ghp_import
 
 script:
   - sudo python3 setup.py install
+  - make html
 
 after_success:
-  - make html
   - cd plugin_packaging && ./build_plugin.sh
 
 deploy:
-  - provider: cloudcontrol
+  - provider: releases
     api_key: ${GH_TOKEN}
     file: "plugin_packaging/coastSHARK_plugin.tar"
     skip_cleanup: true
