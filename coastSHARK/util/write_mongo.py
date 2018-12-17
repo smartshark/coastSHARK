@@ -3,7 +3,7 @@
 import logging
 
 from mongoengine import connect
-from pycoshark.mongomodels import VCSSystem, File, Commit, CodeEntityState
+from pycoshark.mongomodels import Project, VCSSystem, File, Commit, CodeEntityState
 from pycoshark.utils import get_code_entity_state_identifier, create_mongodb_uri_string
 from .complexity_java import SourcemeterConversion
 
@@ -11,7 +11,8 @@ from .complexity_java import SourcemeterConversion
 class MongoDb(object):
     """This class just wraps the Mongo connection code and the query for fetching the correct CodeEntityState for inserting the AST information."""
 
-    def __init__(self, database, user, password, host, port, authentication, ssl, vcs_url, revision):
+    def __init__(self, database, user, password, host, port, authentication, ssl, project_name, vcs_url, revision):
+        self.project_name = project_name
         self.vcs_url = vcs_url
         self.revision = revision
         self.database = database
@@ -27,7 +28,8 @@ class MongoDb(object):
         :param str filepath: The full path of this file.
         :param list imports: A list of strings containing the imports.
         """
-        vcs = VCSSystem.objects.get(url=self.vcs_url)
+        project = Project.objects.get(name=self.project_name)
+        vcs = VCSSystem.objects.get(url=self.vcs_url, project_id=project.id)
         c = Commit.objects.get(revision_hash=self.revision, vcs_system_id=vcs.id)
         f = File.objects.get(path=filepath, vcs_system_id=vcs.id)
 
@@ -42,7 +44,8 @@ class MongoDb(object):
         :param int node_count: The number of AST nodes.
         :param dict node_type_counts: The number for each type of AST node.
         """
-        vcs = VCSSystem.objects.get(url=self.vcs_url)
+        project = Project.objects.get(name=self.project_name)
+        vcs = VCSSystem.objects.get(url=self.vcs_url, project_id=project.id)
         c = Commit.objects.get(revision_hash=self.revision, vcs_system_id=vcs.id)
         f = File.objects.get(path=filepath, vcs_system_id=vcs.id)
 
@@ -63,7 +66,8 @@ class MongoDb(object):
         :param str filepath: The full path of this file.
         :param dict method_data: The extracted method metrics.
         """
-        vcs = VCSSystem.objects.get(url=self.vcs_url)
+        project = Project.objects.get(name=self.project_name)
+        vcs = VCSSystem.objects.get(url=self.vcs_url, project_id=project.id)
         c = Commit.objects.get(revision_hash=self.revision, vcs_system_id=vcs.id)
         f = File.objects.get(path=filepath, vcs_system_id=vcs.id)
 

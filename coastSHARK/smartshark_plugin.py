@@ -47,7 +47,7 @@ def main(args):
     start = timeit.default_timer()
 
     # check mongodb connectivity
-    m = MongoDb(args.db_database, args.db_user, args.db_password, args.db_hostname, args.db_port, args.db_authentication, args.ssl, args.repository_url, args.revision)
+    m = MongoDb(args.db_database, args.db_user, args.db_password, args.db_hostname, args.db_port, args.db_authentication, args.ssl, args.project_name, args.repository_url, args.revision)
     m.connect()
 
     log.info("Starting AST extraction")
@@ -101,6 +101,7 @@ if __name__ == '__main__':
     # we basically re-use the vcsSHARK argparse config here
     parser = get_base_argparser('Analyze the given URI. An URI should be a checked out GIT Repository.', '2.0.1')
     parser.add_argument('-i', '--input', help='Path to the checked out repository directory', required=True)
+    parser.add_argument('-pn', '--project_name', help='Hash of the revision.', required=False)
     parser.add_argument('-r', '--revision', help='Hash of the revision.', required=True)
     parser.add_argument('-u', '--repository_url', help='URL of the project (e.g., GIT Url).', required=True)
     parser.add_argument('-ll', '--log_level', help='Log level for stdout (DEBUG, INFO), default INFO', default='INFO')
