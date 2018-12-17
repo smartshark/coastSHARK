@@ -14,7 +14,7 @@ For Python the build in [ast](https://docs.python.org/3/library/ast.html) packag
 ```bash
 pip install https://github.com/smartshark/coastSHARK/zipball/master --process-dependency-links
 ```
-The --process-dependency-links switch is needed because we install pycoSHARK as a requirement directly from git.
+The --process-dependency-links switch is needed because we install a modified javalang as a requirement directly from git.
 
 ### via setup.py
 ```bash

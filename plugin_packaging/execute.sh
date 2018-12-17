@@ -9,9 +9,9 @@ cp -R $REPOSITORY_PATH "/dev/shm/$NEW_UUID" || exit 1
 cd "/dev/shm/$NEW_UUID" || exit 1
 git checkout -f --quiet $1 || exit 1
 
-COMMAND="python3.5 $PLUGIN_PATH/smartshark_plugin.py --url $4 --project_name ${5} -DB $8 -H $9 -p ${10} -r $1 -i /dev/shm/$NEW_UUID/"
+COMMAND="python3.5 $PLUGIN_PATH/smartshark_plugin.py --repository_url $4 --project_name ${5} -DB $8 -H $9 -p ${10} -r $1 -i /dev/shm/$NEW_UUID/"
 
-
+    
 if [ ! -z ${6+x} ] && [ ${6} != "None" ]; then
 	COMMAND="$COMMAND --db-user ${6}"
 fi
