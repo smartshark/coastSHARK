@@ -38,9 +38,15 @@ fi
 
 $COMMAND
 
-# if folder does not exist exit with 1
+# if folder does not exist log it and exit later with 1
+MISSING=""
 if [ ! -d "/dev/shm/$NEW_UUID/.git" ]; then
     (>&2 echo ".git folder not found!")
+    MISSING="yes"
 fi
 
 rm -rf "/dev/shm/$NEW_UUID"
+
+if [ ! -z "$MISSING" ]; then
+    exit 1
+fi

@@ -1,3 +1,7 @@
+2.0.2
+- add error if .git folder is found missing
+- add debug log for each file that is parsed
+
 2.0.1
 - change param names to harmonize smartshark plugin params
 - update travis deployment to use providers for release deployment and documentation deployment to gh

@@ -65,14 +65,16 @@ def main(args):
             filepath = os.path.join(root, file)
             mongo_filepath = filepath.replace(args.input, '')  # use relative path to find File Document in mongodb
 
+            if file.lower().endswith('.java') or file.lower().endswith('.py'):
+                log.debug('parsing file: {}'.format(mongo_filepath))
             try:
-                if file.endswith('.py'):
+                if file.lower().endswith('.py'):
                     e = ExtractAstPython(filepath)
                     e.load()
                     m.write_imports(mongo_filepath, e.imports)
                     m.write_node_type_counts(mongo_filepath, e.node_count, e.type_counts)
 
-                if file.endswith('.java'):
+                if file.lower().endswith('.java'):
                     e = ExtractAstJava(filepath)
                     e.load()
                     m.write_imports(mongo_filepath, e.imports)
