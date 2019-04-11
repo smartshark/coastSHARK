@@ -85,11 +85,12 @@ def main(args):
             # this is not critical, we can still do the other files
             except error.ParserException as e:
                 log.info(str(e))
-                pass
             # this is not critical, we can still do the other files
             except TabError as e:
                 log.info(str(e))
-                pass
+            # this is not ciritcal, we can still do the other files
+            except IndentationError as e:
+                log.info(str(e))
             # this is critical
             except Exception as e:
                 log.exception(e)

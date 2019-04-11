@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 PLUGIN_PATH=$3
 REPOSITORY_PATH=$2
