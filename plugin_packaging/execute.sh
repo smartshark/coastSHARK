@@ -48,7 +48,7 @@ if [ ! -z ${14+x} ] && [ ${14} != "None" ]; then
     COMMAND="$COMMAND -mm ${14}"
 fi
 
-$COMMAND
+eval $COMMAND
 
 # if folder does not exist log it to stderr only and exit later with 1
 MISSING=""
