@@ -21,7 +21,7 @@ rsync -q -r $REPOSITORY_PATH/ $RAMDISK_PATH || error_exit "error copy to ramdisk
 cd $RAMDISK_PATH || error_exit "error cd to ramdisk"
 git checkout -f --quiet $1 || error_exit "error checkout"
 
-COMMAND="python3.5 $PLUGIN_PATH/smartshark_plugin.py --repository_url ${4} --project_name ${5} -DB ${8} -H ${9} -p ${10} -r ${1} -i $RAMDISK_PATH"
+COMMAND="python3.5 $PLUGIN_PATH/smartshark_plugin.py --repository_url ${4} --project_name ${5} -DB ${8} -H ${9} -p ${10} -r ${1} -i $RAMDISK_PATH/"
 
     
 if [ ! -z ${6+x} ] && [ ${6} != "None" ]; then
