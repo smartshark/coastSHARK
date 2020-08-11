@@ -26,5 +26,6 @@ clean:
 .PHONY: html
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
+	touch $(BUILDDIR)/.nojekyll
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)."
