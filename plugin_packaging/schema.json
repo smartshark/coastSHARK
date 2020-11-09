@@ -1790,5 +1790,5 @@
             "desc": "Collection that contains for each commit of the project all code entity states (e.g., all methods of the project at each commit)"
         }
     ],
-    "plugin": "coastSHARK_2.0.1"
+    "plugin": "coastSHARK_2.0.5"
 }

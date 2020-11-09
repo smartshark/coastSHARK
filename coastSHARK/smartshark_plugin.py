@@ -35,13 +35,17 @@ def main(args):
     ignore_files = []
     ignore_dirs = []
 
+    input_path = args.input
+
     # preflight checks
     if not os.path.isdir(args.input):
         raise Exception('--input {} is not valid'.format(args.input))
     if not os.access(args.input, os.R_OK):
         raise Exception('--input {} is not readable'.format(args.input))
-    if not args.input.endswith('/'):
-        raise Exception('--input needs trailing slash')
+    if not input_path.endswith('/'):
+        input_path += '/'
+        log.info('appending / to input')
+        # raise Exception('--input needs trailing slash')
 
     # timing
     start = timeit.default_timer()
