@@ -4,3 +4,7 @@ class CoastException(Exception):
 
 class ParserException(CoastException):
     pass
+
+
+class SyntaxException(CoastException):
+    pass

@@ -203,8 +203,11 @@ class ExtractAstPython(object):
             self.nt = NodeTypeCountVisitor()
             self.nt.visit(self.astdata)
         except pgen2.parse.ParseError as e:
-            err = 'Parser Error in file: {}'.format(self.filename)
+            err = 'Parser Error in file: {}, error: {}'.format(self.filename, e)
             raise error.ParserException(err)
+        except SyntaxError as e:
+            err = 'Syntax Error in file: {}, error: {}'.format(self.filename, e)
+            raise error.SyntaxException(err)
 
     @property
     def imports(self):
