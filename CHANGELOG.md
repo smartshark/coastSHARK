@@ -1,3 +1,15 @@
+2.0.6
+- add init to util
+
+2.0.5
+- automatically add slash to input path
+
+2.0.4
+- execute.sh changes for slurm
+
+2.0.3
+- update pycoshark dependency
+
 2.0.2
 - add error if .git folder is found missing
 - add debug log for each file that is parsed
