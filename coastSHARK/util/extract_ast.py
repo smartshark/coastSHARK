@@ -59,7 +59,7 @@ def convert_2to3(file_content, file_name):
     return str(tmp)
 
 
-class NodePathVisitor(object):
+class NodePathVisitor:
     """Overwrite ast.NodeVisitor because we also want the level for pretty printing.
 
     This just includes the level for the NodePrintVisitor.
@@ -129,7 +129,7 @@ class NodeTypeCountVisitor(ast.NodeVisitor):
         super().generic_visit(node)
 
 
-class ExtractAstJava(object):
+class ExtractAstJava:
     """Extracts the AST from .java Files.
 
     Uses the javalang Library.
@@ -152,12 +152,16 @@ class ExtractAstJava(object):
         try:
             with open(self.filename, 'r', encoding='latin-1') as f:  # latin-1 because we assume no crazy umlaut function names
                 self.astdata = javalang.parse.parse(f.read())
-        except javalang.parser.JavaSyntaxError as e:
+        except javalang.parser.JavaSyntaxError:
             err = 'Parser Error in file: {}'.format(self.filename)
             raise error.ParserException(err)
 
         except javalang.tokenizer.LexerError as le:
             err = 'Lexer Error in file: {}\n{}'.format(self.filename, le)
+            raise error.ParserException(err)
+
+        except IndexError:
+            err = 'IndexError in JavaLang, Java > 8'
             raise error.ParserException(err)
 
         assert self.astdata is not None
@@ -180,7 +184,7 @@ class ExtractAstJava(object):
                 raise error.CoastException("Unknown NodeType encountered: {}".format(type_name))
 
 
-class ExtractAstPython(object):
+class ExtractAstPython:
     """Extracts the AST from .py Files.
 
     Uses the build in ast and the visitor pattern."""

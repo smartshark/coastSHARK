@@ -45,7 +45,7 @@ def main(args):
 
     m = CsvFile()
 
-    for root, dirs, files in os.walk(args.input):
+    for root, _, files in os.walk(args.input):
 
         if root.replace(args.input, '') in ignore_dirs:  # subtract base_dir then match against ignore_list
             continue
@@ -60,28 +60,27 @@ def main(args):
 
             try:
                 if file.endswith('.py'):
-                    log.debug('parsing: {}'.format(mongo_filepath))
-                    e = ExtractAstPython(filepath)
-                    e.load()
-                    m.write_line(mongo_filepath, e.imports, e.node_count, e.type_counts)
+                    log.debug('parsing: %s', mongo_filepath)
+                    eap = ExtractAstPython(filepath)
+                    eap.load()
+                    m.write_line(mongo_filepath, eap.imports, eap.node_count, eap.type_counts)
 
                 if file.endswith('.java'):
-                    log.debug('parsing: {}'.format(mongo_filepath))
-                    e = ExtractAstJava(filepath)
-                    e.load()
-                    m.write_line(mongo_filepath, e.imports, e.node_count, e.type_counts)
+                    log.debug('parsing: %s', mongo_filepath)
+                    eaj = ExtractAstJava(filepath)
+                    eaj.load()
+                    m.write_line(mongo_filepath, eaj.imports, eaj.node_count, eaj.type_counts)
 
                     if args.method_metrics:
-                        m.write_method_metrics(mongo_filepath, e.method_metrics())
+                        m.write_method_metrics(mongo_filepath, eaj.method_metrics())
 
             # this is not critical, we can still do the other files
-            except error.ParserException as e:
-                log.info(str(e))
-                pass
+            except error.ParserException as err:
+                log.info(str(err))
             # this is critical
-            except Exception as e:
-                log.error('File: {}'.format(filepath))
-                log.exception(e)
+            except Exception as err:
+                log.error('File: %s', filepath)
+                log.exception(err)
                 raise
 
     end = timeit.default_timer() - start
