@@ -12,7 +12,7 @@ setup(
     name='coastSHARK',
     version='2.0.6',
     description='Collect AST Information for smartSHARK.',
-    install_requires=['javalang>=0.13.1', 'pycoshark>=1.2.6'],
+    install_requires=['javalang>=0.13.1', 'pycoshark @ git+https://github.com/smartshark/pycoSHARK.git@2.0.0'],
     dependency_links=['git+https://github.com/atrautsch/javalang.git#egg=javalang-0.13.1'],
     author='atrautsch',
     author_email='alexander.trautsch@stud.uni-goettingen.de',

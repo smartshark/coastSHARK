@@ -30,8 +30,8 @@ class MongoDb(object):
         """
         project = Project.objects.get(name=self.project_name)
         vcs = VCSSystem.objects.get(url=self.vcs_url, project_id=project.id)
-        c = Commit.objects.get(revision_hash=self.revision, vcs_system_id=vcs.id)
-        f = File.objects.get(path=filepath, vcs_system_id=vcs.id)
+        c = Commit.objects.get(revision_hash=self.revision, vcs_system_ids=vcs.id)
+        f = File.objects.filter(path=filepath, vcs_system_ids=vcs.id).first()
 
         s_key = get_code_entity_state_identifier(filepath, c.id, f.id)
 
@@ -46,8 +46,8 @@ class MongoDb(object):
         """
         project = Project.objects.get(name=self.project_name)
         vcs = VCSSystem.objects.get(url=self.vcs_url, project_id=project.id)
-        c = Commit.objects.get(revision_hash=self.revision, vcs_system_id=vcs.id)
-        f = File.objects.get(path=filepath, vcs_system_id=vcs.id)
+        c = Commit.objects.get(revision_hash=self.revision, vcs_system_ids=vcs.id)
+        f = File.objects.filter(path=filepath, vcs_system_ids=vcs.id).first()
 
         tmp = {'set__metrics__{}'.format(k): v for k, v in node_type_counts.items()}
         tmp['set__metrics__node_count'] = node_count
@@ -68,8 +68,8 @@ class MongoDb(object):
         """
         project = Project.objects.get(name=self.project_name)
         vcs = VCSSystem.objects.get(url=self.vcs_url, project_id=project.id)
-        c = Commit.objects.get(revision_hash=self.revision, vcs_system_id=vcs.id)
-        f = File.objects.get(path=filepath, vcs_system_id=vcs.id)
+        c = Commit.objects.get(revision_hash=self.revision, vcs_system_ids=vcs.id)
+        f = File.objects.filter(path=filepath, vcs_system_ids=vcs.id).first()
 
         sc = SourcemeterConversion()
 

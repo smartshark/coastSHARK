@@ -27,6 +27,9 @@ PYTHON_NODE_TYPES += ['FunctionDef', 'Lambda', 'arguments', 'arg', 'Return', 'Yi
 # new async stuff (python 3.5)
 PYTHON_NODE_TYPES += ['AsyncFunctionDef', 'Await', 'AsyncFor', 'AsyncWith']
 
+# ADDED FOR REFUGE: f-string support and Python 3.7+ forward compatibility
+PYTHON_NODE_TYPES += ['JoinedStr', 'FormattedValue', 'Constant']
+
 # for java
 # node types from: https://github.com/c2nes/javalang/blob/master/javalang/tree.py
 JAVA_NODE_TYPES = [
